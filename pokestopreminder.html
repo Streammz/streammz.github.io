@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<title>Pokestop reminder</title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<style>
+			body { color: #4444ff; }
+			h1 { font-size: 5em; }
+			h2 { font-size: 4.2em; }
+			h3 { font-size: 3.6em; }
+			h4 { font-size: 3em; }
+			h5 { font-size: 2.5em; }
+			h6 { font-size: 2em; }
+			
+			.pokestop-ready { background-color: #aaffaa; }
+			.pokestop-notready { background-color: #ffaaaa; }
+		</style>
+	</head>
+	<body class="pokestop-ready">
+		
+		<center style="margin-top: 200px">
+			<h2>Pokestop timer:</h2>
+			<h1 class="poketimer">Ready to be claimed!</h1>
+			
+			<h6>Press space when you are done claiming the pokestops</h4>
+		</center>
+	
+		<script type="text/javascript">
+			$(function() {
+				var lastChecked = new Date(0);
+				
+				$(document).keypress(function (ev) {
+					if (ev.charCode == 32) {
+						lastChecked = new Date();
+						check();
+					}
+				});
+				
+				var check = function () {
+					var diff = new Date() - lastChecked;
+					var mins = Math.floor((300000-diff) / 60000);
+					var secs = Math.floor((300000-diff) / 1000) - (mins*60);
+					
+					if (diff < 300000) {
+						if ($("body").is('.pokestop-ready')) {
+							$("body").removeClass('pokestop-ready');
+							$("body").addClass('pokestop-notready');
+						}
+						$('.poketimer').html('00:' + (mins<10 ? '0' + mins : '' + mins) + ':' + (secs < 10 ? '0' + secs : '' + secs));
+					} else if (diff >= 300000) {
+						if ($('body').is('.pokestop-notready')) {
+							$("body").addClass('pokestop-ready');
+							$("body").removeClass('pokestop-notready');
+						}
+						$('.poketimer').html('Ready to be claimed!');
+					}
+				}
+				
+				setInterval(check, 1000);
+			});
+		</script>
+	</body>
+</html>
