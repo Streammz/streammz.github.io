@@ -25,18 +25,19 @@
 		</center>
 	
 		<script type="text/javascript">
+			var lastChecked, check;
 			$(function() {
-				var lastChecked = new Date(0);
+				window.lastChecked = new Date(0);
 				
 				$(document).keypress(function (ev) {
 					if (ev.charCode == 32) {
-						lastChecked = new Date();
+						window.lastChecked = new Date();
 						check();
 					}
 				});
 				
-				var check = function () {
-					var diff = new Date() - lastChecked;
+				var check = window.check = function () {
+					var diff = new Date() - window.lastChecked;
 					var mins = Math.floor((300000-diff) / 60000);
 					var secs = Math.floor((300000-diff) / 1000) - (mins*60);
 					
