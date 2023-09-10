@@ -1131,5 +1131,60 @@ var allRecipes = [
         "ingredient": "Maaltijdsalade"
       }
     ]
+  },
+  {
+    "name": "Rijst met balletjes",
+    "category": "Pasta/rijst",
+    "ingredients": [
+      {
+        "quantity": 300,
+        "quantityType": "gram",
+        "ingredient": "Gehakt"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Gehaktkruiden"
+      },
+      {
+        "quantity": 2,
+        "ingredient": "Sjalot"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Knoflookpuree"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Ketjap"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Sambal"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Eieren"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Paneermeel"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Ketchup"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Honing"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Kipbouillon"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Moizena"
+      }
+    ]
   }
 ]

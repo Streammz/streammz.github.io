@@ -139,6 +139,10 @@ var aisleInfo = {
       "aisle": "Vlees/koeling"
     },
     {
+      "name": "Gehaktkruiden",
+      "aisle": "Kruiden"
+    },
+    {
       "name": "Gele paprika",
       "aisle": "Groentewinkel"
     },
@@ -171,6 +175,10 @@ var aisleInfo = {
       "aisle": "(Af)bakproducten"
     },
     {
+      "name": "Honing",
+      "aisle": "(Af)bakproducten"
+    },
+    {
       "name": "Houdbare melk",
       "aisle": "(Af)bakproducten"
     },
@@ -197,6 +205,10 @@ var aisleInfo = {
     {
       "name": "Kerriepoeder",
       "aisle": "Kruiden"
+    },
+    {
+      "name": "Ketchup",
+      "aisle": "Zuren/sauzen/soepen"
     },
     {
       "name": "Ketjap",
@@ -259,12 +271,20 @@ var aisleInfo = {
       "aisle": "Houdbare groente"
     },
     {
+      "name": "Moizena",
+      "aisle": "(Af)bakproducten"
+    },
+    {
       "name": "Nacho ovenschotel pakket",
       "aisle": "Wereldstraat"
     },
     {
       "name": "Ontbijtspek",
       "aisle": "Vlees/koeling"
+    },
+    {
+      "name": "Paneermeel",
+      "aisle": "(Af)bakproducten"
     },
     {
       "name": "Pannenkoekenmix",
@@ -364,6 +384,10 @@ var aisleInfo = {
     },
     {
       "name": "Runderbouillonblokje",
+      "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Sambal",
       "aisle": "Wereldstraat"
     },
     {
