@@ -24,7 +24,11 @@ var renderShoppingList;
         for (var category of categories) {
             buildHeader(category).appendTo($recipes);
 
-            var recipes = allRecipes.filter((val) => val.category == category);
+            var recipes = allRecipes
+                .filter((val) => val.category == category)
+                .sort(function (a, b) {
+                    return a.name > b.name ? 1 : -1
+                });
             for (var recipe of recipes) {
                 buildRecipeBlock(recipe).appendTo($recipes);
             }
