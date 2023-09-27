@@ -227,6 +227,10 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Knoflooksaus",
+      "aisle": "Zuren/sauzen/soepen"
+    },
+    {
       "name": "Knorr Pasta Carbonada",
       "aisle": "Wereldstraat"
     },

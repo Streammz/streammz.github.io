@@ -24,6 +24,14 @@ var allRecipes = [
       {
         "quantity": 1,
         "ingredient": "Pittige shoarma"
+      },
+      {
+        "quantity": 0.5,
+        "ingredient": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Knoflooksaus"
       }
     ]
   },
@@ -402,11 +410,11 @@ var allRecipes = [
     "category": "Makkelijk",
     "ingredients": [
       {
-        "quantity": 2,
+        "quantity": 1,
         "ingredient": "Doperwtjes pot"
       },
       {
-        "quantity": 2,
+        "quantity": 1,
         "ingredient": "Aardappelpartjes"
       },
       {
