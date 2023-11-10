@@ -44,7 +44,8 @@ var renderShoppingList;
     function buildRecipeBlock(recipe) {
         var result = $($templateRecipeBlock);
         result.find('.name').text(recipe.name);
-        result.find('.card').on('click', function () {
+        result.find('.card').on('click', function (e) {
+            if ($(e.target).is('input')) return;
             var input = result.find('input[type=checkbox]');
             input.prop('checked', !input.is(':checked'));
         });
