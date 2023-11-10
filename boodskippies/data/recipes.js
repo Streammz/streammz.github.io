@@ -11,6 +11,14 @@ var allRecipes = [
         "quantity": 2,
         "ingredient": "Kant-en-klaar soep"
       }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Boter"
+      },
+      {
+        "ingredient": "Broodbeleg"
+      }
     ]
   },
   {
@@ -31,6 +39,11 @@ var allRecipes = [
       },
       {
         "quantity": 1,
+        "ingredient": "Knoflooksaus"
+      }
+    ],
+    "optionalIngredients": [
+      {
         "ingredient": "Knoflooksaus"
       }
     ]
@@ -267,6 +280,14 @@ var allRecipes = [
         "quantity": 2,
         "ingredient": "Afbakbroodjes"
       }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Boter"
+      },
+      {
+        "ingredient": "Broodbeleg"
+      }
     ]
   },
   {
@@ -403,6 +424,17 @@ var allRecipes = [
         "quantity": 3,
         "ingredient": "Eieren"
       }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Stroop"
+      },
+      {
+        "ingredient": "Poedersuiker"
+      },
+      {
+        "ingredient": "Chocopasta"
+      }
     ]
   },
   {
@@ -421,6 +453,17 @@ var allRecipes = [
         "quantity": 1,
         "ingredient": "Vissticks"
       }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Mayo"
+      },
+      {
+        "ingredient": "Appelmoes"
+      },
+      {
+        "ingredient": "Olijfolie"
+      }
     ]
   },
   {
@@ -438,6 +481,17 @@ var allRecipes = [
       {
         "quantity": 1,
         "ingredient": "Aardappelpartjes"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Mayo"
+      },
+      {
+        "ingredient": "Appelmoes"
+      },
+      {
+        "ingredient": "Olijfolie"
       }
     ]
   },
@@ -541,6 +595,17 @@ var allRecipes = [
       {
         "quantity": 0.5,
         "ingredient": "Paprika"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Mayo"
+      },
+      {
+        "ingredient": "Curry"
+      },
+      {
+        "ingredient": "Ketchup"
       }
     ]
   },
@@ -658,6 +723,14 @@ var allRecipes = [
       {
         "quantity": 1,
         "ingredient": "Doperwtjes"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Mayo"
+      },
+      {
+        "ingredient": "Appelmoes"
       }
     ]
   },
@@ -1137,6 +1210,11 @@ var allRecipes = [
       {
         "quantity": 2,
         "ingredient": "Maaltijdsalade"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Mosterd-dille dressing"
       }
     ]
   },

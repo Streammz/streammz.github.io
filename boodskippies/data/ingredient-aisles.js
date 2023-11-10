@@ -55,6 +55,10 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Appelmoes",
+      "aisle": "Houdbare groente"
+    },
+    {
       "name": "Augurk",
       "aisle": "Zuren/sauzen/soepen"
     },
@@ -87,6 +91,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Broodbeleg",
+      "aisle": "Broodbeleg"
+    },
+    {
       "name": "Bruine bonen",
       "aisle": "Houdbare groente"
     },
@@ -107,6 +115,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Chocopasta",
+      "aisle": "Broodbeleg"
+    },
+    {
       "name": "Ciabatta",
       "aisle": "(Af)bakproducten"
     },
@@ -117,6 +129,10 @@ var aisleInfo = {
     {
       "name": "Crème fraîche light",
       "aisle": "Zuivel/boter/toetjes"
+    },
+    {
+      "name": "Curry",
+      "aisle": "Zuren/sauzen/soepen"
     },
     {
       "name": "Doperwtjes",
@@ -275,12 +291,24 @@ var aisleInfo = {
       "aisle": "Houdbare groente"
     },
     {
+      "name": "Mayo",
+      "aisle": "Zuren/sauzen/soepen"
+    },
+    {
       "name": "Moizena",
       "aisle": "(Af)bakproducten"
     },
     {
+      "name": "Mosterd-dille dressing",
+      "aisle": "Groentewinkel"
+    },
+    {
       "name": "Nacho ovenschotel pakket",
       "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Olijfolie",
+      "aisle": "Zuren/sauzen/soepen"
     },
     {
       "name": "Ontbijtspek",
@@ -345,6 +373,10 @@ var aisleInfo = {
     {
       "name": "Plakken kaas",
       "aisle": "Vlees/koeling"
+    },
+    {
+      "name": "Poedersuiker",
+      "aisle": "(Af)bakproducten"
     },
     {
       "name": "Prei",
@@ -421,6 +453,10 @@ var aisleInfo = {
     {
       "name": "Spinazie",
       "aisle": "Diepvries"
+    },
+    {
+      "name": "Stroop",
+      "aisle": "(Af)bakproducten"
     },
     {
       "name": "Taco maaltijdpakket Knorr",
