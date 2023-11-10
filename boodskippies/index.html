@@ -60,41 +60,69 @@
         <label for="recipe-category-field">Categorie</label>
         <input name="category" id="recipe-category-field" type="text" class="form-control" />
       </div>
-      <table class="table" id="ingredient-list">
-        <thead>
-          <tr>
-            <th colspan="2">Aantal</th>
-            <th>Ingrediënt</th>
-          </tr>
-        </thead>
-        <tbody>
-          <script type="text/template" id="template-ingredient-row">
+      <div class="form-group">
+        <label>Benodigde ingrediënten</label>
+        <table class="table" id="ingredient-list">
+          <thead>
             <tr>
-              <td class="px-1" style="width:30%">
-                <input name="quantity" type="number" class="form-control text-right" step="any" />
-              </td>
-              <td class="px-1" style="width:20%">
-                <select name="quantityType" type="dropdown" class="form-control">
-                  <option value="">stuk(s)</option>
-                  <option value="gram">gram</option>
-                  <option value="liter">liter</option>
-                </select>
-              </td>
-              <td class="px-1" style="width:50%">
-                <input name="ingredient" type="text" class="form-control" />
+              <th colspan="2">Aantal</th>
+              <th>Ingrediënt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <script type="text/template" id="template-ingredient-row">
+              <tr>
+                <td class="px-1" style="width:30%">
+                  <input name="quantity" type="number" class="form-control text-right" step="any" />
+                </td>
+                <td class="px-1" style="width:20%">
+                  <select name="quantityType" type="dropdown" class="form-control">
+                    <option value="">stuk(s)</option>
+                    <option value="gram">gram</option>
+                    <option value="liter">liter</option>
+                  </select>
+                </td>
+                <td class="px-1" style="width:50%">
+                  <input name="ingredient" type="text" class="form-control" />
+                </td>
+              </tr>
+            </script>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" class="text-center">
+                <button class="btn btn-primary" id="new-ingredient-button">Ingrediënt toevoegen</button>
               </td>
             </tr>
-          </script>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="3" class="text-center">
-              <button class="btn btn-primary" id="new-ingredient-button">Ingrediënt toevoegen</button>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-
+          </tfoot>
+        </table>
+      </div>
+      <div class="form-group">
+        <label>Nachecken</label>
+        <table class="table" id="optional-ingredient-list">
+          <thead>
+            <tr>
+              <th>Ingrediënt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <script type="text/template" id="template-optional-ingredient-row">
+              <tr>
+                <td class="px-1">
+                  <input name="ingredient" type="text" class="form-control" />
+                </td>
+              </tr>
+            </script>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" class="text-center">
+                <button class="btn btn-primary" id="new-optional-ingredient-button">Ingrediënt toevoegen</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
       <button class="btn btn-success" id="save-button">Opslaan</button>
       <button class="btn btn-default" id="back-button">Terug</button>
     </div>

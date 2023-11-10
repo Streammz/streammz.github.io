@@ -20,8 +20,8 @@ var renderAisles;
     });
 
     renderAisles = function () {
-        allIngredients = allRecipes
-            .map((val) => val.ingredients.map((o) => o.ingredient))
+        allIngredients = allRecipes.map((val) => val.ingredients.map((o) => o.ingredient))
+            .concat(allRecipes.map((val) => (val.optionalIngredients || []).map((o) => o.ingredient)))
             .reduce((a, b) => a.concat(b))
             .filter(arrDistinct)
             .sort((a, b) => a.toUpperCase() > b.toUpperCase() ? 1 : -1);
