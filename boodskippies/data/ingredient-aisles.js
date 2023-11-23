@@ -279,6 +279,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Maaltijdpakket Kip Tandoori",
+      "aisle": "Wereldstraat"
+    },
+    {
       "name": "Maaltijdsalade",
       "aisle": "Groentewinkel"
     },
@@ -455,6 +459,14 @@ var aisleInfo = {
       "aisle": "Diepvries"
     },
     {
+      "name": "Spruitjes",
+      "aisle": "Groentewinkel"
+    },
+    {
+      "name": "Stoofpeertjes",
+      "aisle": "Groentewinkel"
+    },
+    {
       "name": "Stroop",
       "aisle": "(Af)bakproducten"
     },
@@ -501,6 +513,10 @@ var aisleInfo = {
     {
       "name": "Woksaus",
       "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Worstjes",
+      "aisle": "Vlees/koeling"
     },
     {
       "name": "Wraps maaltijdpakket",

@@ -758,8 +758,13 @@ var allRecipes = [
       {
         "quantity": 1,
         "ingredient": "Ananasstukjes"
+      },
+      {
+        "quantity": 0.5,
+        "ingredient": "Ham"
       }
-    ]
+    ],
+    "optionalIngredients": []
   },
   {
     "name": "Broodje rundergehakt",
@@ -1069,8 +1074,13 @@ var allRecipes = [
         "quantity": 60,
         "quantityType": "gram",
         "ingredient": "Geraspte kaas"
+      },
+      {
+        "quantity": 0.5,
+        "ingredient": "Courgette"
       }
-    ]
+    ],
+    "optionalIngredients": []
   },
   {
     "name": "Hutspot wortel/ui",
@@ -1200,8 +1210,13 @@ var allRecipes = [
         "quantity": 100,
         "quantityType": "gram",
         "ingredient": "Crème fraîche light"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Maaltijdpakket Kip Tandoori"
       }
-    ]
+    ],
+    "optionalIngredients": []
   },
   {
     "name": "Maaltijdsalades",
@@ -1272,5 +1287,32 @@ var allRecipes = [
         "ingredient": "Moizena"
       }
     ]
+  },
+  {
+    "name": "Spruitjes",
+    "category": "Winter",
+    "ingredients": [
+      {
+        "quantity": 1,
+        "ingredient": "Spruitjes"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Kookaardappels"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Stoofpeertjes"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Jus"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Worstjes"
+      }
+    ],
+    "optionalIngredients": []
   }
 ]
