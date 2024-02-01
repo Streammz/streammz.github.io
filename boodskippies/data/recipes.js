@@ -211,7 +211,8 @@ var allRecipes = [
         "ingredient": "Ui"
       },
       {
-        "quantity": 1,
+        "quantity": 300,
+        "quantityType": "gram",
         "ingredient": "Gehakt"
       },
       {
@@ -223,8 +224,13 @@ var allRecipes = [
         "quantity": 0.125,
         "quantityType": "liter",
         "ingredient": "Magere yoghurt"
+      },
+      {
+        "quantity": 0.5,
+        "ingredient": "Sla"
       }
-    ]
+    ],
+    "optionalIngredients": []
   },
   {
     "name": "Rijst met ragout",
