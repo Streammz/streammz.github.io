@@ -247,7 +247,7 @@ var aisleInfo = {
       "aisle": "Zuren/sauzen/soepen"
     },
     {
-      "name": "Knorr Pasta Carbonada",
+      "name": "Knorr Pasta Bolognese",
       "aisle": "Wereldstraat"
     },
     {
@@ -321,6 +321,10 @@ var aisleInfo = {
     {
       "name": "Paneermeel",
       "aisle": "(Af)bakproducten"
+    },
+    {
+      "name": "Pannenkoeken",
+      "aisle": "Vlees/koeling"
     },
     {
       "name": "Pannenkoekenmix",
@@ -444,6 +448,10 @@ var aisleInfo = {
     },
     {
       "name": "Snijbonen",
+      "aisle": "Groentewinkel"
+    },
+    {
+      "name": "Soep",
       "aisle": "Groentewinkel"
     },
     {
