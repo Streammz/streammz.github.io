@@ -452,7 +452,7 @@ var aisleInfo = {
     },
     {
       "name": "Soep",
-      "aisle": "Groentewinkel"
+      "aisle": null
     },
     {
       "name": "Sperziebonen",
