@@ -1323,7 +1323,7 @@ var allRecipes = [
     "optionalIngredients": []
   },
   {
-    "name": "Soep met brood",
+    "name": "Soep met pannenkoeken",
     "category": "Makkelijk",
     "ingredients": [
       {
