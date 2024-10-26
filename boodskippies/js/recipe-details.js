@@ -54,6 +54,7 @@ var renderRecipeDetails;
         result.find('[name=quantity]').val(ingredient.quantity);
         result.find('[name=quantityType]').val(ingredient.quantityType);
         result.find('[name=ingredient]').val(ingredient.ingredient);
+        result.find('button.btn-secondary').click(function () { $(this).closest('tr').remove(); });
         return result;
     }
 
@@ -63,6 +64,7 @@ var renderRecipeDetails;
         result.find('[name=quantity]').val(ingredient.quantity);
         result.find('[name=quantityType]').val(ingredient.quantityType);
         result.find('[name=ingredient]').val(ingredient.ingredient);
+        result.find('button.btn-secondary').click(function () { $(this).closest('tr').remove(); });
         return result;
     }
 
