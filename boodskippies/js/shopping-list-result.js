@@ -51,12 +51,16 @@ var generatedIngredients;
 
     function buildIngredientRow(ingredient) {
         var result = $('<li></li>');
-        result.text(`${generateQuantityText(ingredient)} ${ingredient.ingredient}`.trim());
+        if (ingredient.optional) {
+            result.addClass('text-muted font-italic font-weight-light');
+        }
+        result.text(`${generateQuantityText(ingredient)} ${ingredient.ingredient}${ingredient.optional ? '?' : ''}`.trim());
+        result.attr('title', `Nodig voor de volgende recepten:\r\n- ${ingredient.recipes.join('\r\n- ')}`);
         return result;
     }
 
     function generateQuantityText(ingredient) {
-        if (ingredient.quantity == 1) {
+        if (ingredient.quantity == 1 || ingredient.optional) {
             return '';
         }
         if (!ingredient.quantityType) {

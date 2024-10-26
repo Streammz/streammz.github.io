@@ -63,9 +63,28 @@ var renderShoppingList;
             for (var ingredient of recipe.ingredients) {
                 var existingIngredient = ingredients.filter((el) => el.ingredient == ingredient.ingredient && el.quantityType == ingredient.quantityType)[0];
                 if (existingIngredient != null) {
+                    existingIngredient.recipes.push(recipe.name);
                     existingIngredient.quantity += ingredient.quantity;
                 } else {
-                    ingredients.push(ingredient);
+                    var ingredientToAdd = { 
+                        ingredient: ingredient.ingredient,
+                        quantity: ingredient.quantity,
+                        quantityType: ingredient.quantityType,
+                        recipes: [recipe.name]
+                    };
+                    ingredients.push(ingredientToAdd);
+                }
+            }
+
+            for (var ingredient of (recipe.optionalIngredients || [])) {
+                var existingIngredient = ingredients.filter((el) => el.ingredient == ingredient.ingredient)[0];
+                if (existingIngredient == null) {
+                    var ingredientToAdd = { 
+                        optional: true,
+                        ingredient: ingredient.ingredient,
+                        recipes: [recipe.name],
+                    };
+                    ingredients.push(ingredientToAdd);
                 }
             }
         }

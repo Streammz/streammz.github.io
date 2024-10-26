@@ -59,12 +59,20 @@ var aisleInfo = {
       "aisle": "Houdbare groente"
     },
     {
+      "name": "Aubergine",
+      "aisle": "Groentewinkel"
+    },
+    {
       "name": "Augurk",
       "aisle": "Zuren/sauzen/soepen"
     },
     {
       "name": "Avondvlees",
       "aisle": "Vlees/koeling"
+    },
+    {
+      "name": "Bakpapier",
+      "aisle": "Huishouden"
     },
     {
       "name": "Bamipakket",
@@ -111,6 +119,14 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Cherrytomaatjes",
+      "aisle": "Groentewinkel"
+    },
+    {
+      "name": "Cherrytomaten",
+      "aisle": "Groentewinkel"
+    },
+    {
       "name": "Chili mix Knorr",
       "aisle": "Wereldstraat"
     },
@@ -147,6 +163,10 @@ var aisleInfo = {
       "aisle": "Brood"
     },
     {
+      "name": "Feta",
+      "aisle": "Vlees/koeling"
+    },
+    {
       "name": "Frituursnacks",
       "aisle": "Diepvries"
     },
@@ -165,6 +185,10 @@ var aisleInfo = {
     {
       "name": "Geraspte kaas",
       "aisle": "Vlees/koeling"
+    },
+    {
+      "name": "Gnocchi",
+      "aisle": "Wereldstraat"
     },
     {
       "name": "Groene paprika",
@@ -203,6 +227,14 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Hutspotkruiden",
+      "aisle": "Groentewinkel"
+    },
+    {
+      "name": "Jumbo Satépannetje met rijst",
+      "aisle": "Wereldstraat"
+    },
+    {
       "name": "Jus",
       "aisle": "Zuren/sauzen/soepen"
     },
@@ -237,6 +269,10 @@ var aisleInfo = {
     {
       "name": "Kipbouillon",
       "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Kipfilet",
+      "aisle": "Vlees/koeling"
     },
     {
       "name": "Knoflookpuree",
@@ -319,6 +355,10 @@ var aisleInfo = {
       "aisle": "Vlees/koeling"
     },
     {
+      "name": "Oven aardappels",
+      "aisle": "Vlees/koeling"
+    },
+    {
       "name": "Paneermeel",
       "aisle": "(Af)bakproducten"
     },
@@ -357,6 +397,10 @@ var aisleInfo = {
     {
       "name": "Pesto",
       "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Peterselie",
+      "aisle": "Groentewinkel"
     },
     {
       "name": "Peultjes",
@@ -419,6 +463,10 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Roomkaas",
+      "aisle": "Vlees/koeling"
+    },
+    {
       "name": "Roti maaltijdpakket",
       "aisle": "Wereldstraat"
     },
@@ -452,7 +500,7 @@ var aisleInfo = {
     },
     {
       "name": "Soep",
-      "aisle": null
+      "aisle": "Groentewinkel"
     },
     {
       "name": "Sperziebonen",
@@ -515,11 +563,19 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Witte rijst noedels",
+      "aisle": "Wereldstraat"
+    },
+    {
       "name": "Wokgroenten",
       "aisle": "Groentewinkel"
     },
     {
       "name": "Woksaus",
+      "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Woksaus soja",
       "aisle": "Wereldstraat"
     },
     {
@@ -531,8 +587,20 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Zalm",
+      "aisle": "Vlees/koeling"
+    },
+    {
       "name": "Zilveruitjes",
       "aisle": "Zuren/sauzen/soepen"
+    },
+    {
+      "name": "Zonnebloemolie",
+      "aisle": "Zuren/sauzen/soepen"
+    },
+    {
+      "name": "Zwarte peper",
+      "aisle": "Kruiden"
     }
   ]
 }

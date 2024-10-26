@@ -195,6 +195,42 @@ var allRecipes = [
       }
     ]
   },
+  
+  {
+    "name": "Zalmschotel",
+    "category": "Traybakes",
+    "ingredients": [
+      {
+        "quantity": 185,
+        "quantityType": "gram",
+        "ingredient": "Roomkaas"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Bloemkool"
+      },
+      {
+        "quantity": 425,
+        "quantityType": "gram",
+        "ingredient": "Oven aardappels"
+      },
+      {
+        "quantity": 320,
+        "quantityType": "gram",
+        "ingredient": "Zalm"
+      },
+      {
+        "quantity": 30,
+        "quantityType": "gram",
+        "ingredient": "Peterselie"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Bakpapier"
+      }
+    ]
+  },
   {
     "name": "Nacho ovenschotel",
     "category": "Maaltijdpakket",
@@ -795,14 +831,16 @@ var allRecipes = [
         "ingredient": "Tomatenpuree"
       },
       {
-        "quantity": 1,
+        "quantity": 75,
+        "quantityType": "gram",
         "ingredient": "Geraspte kaas"
       },
       {
         "quantity": 0.5,
         "ingredient": "Runderbouillonblokje"
       }
-    ]
+    ],
+    "optionalIngredients": []
   },
   {
     "name": "Boerenkool",
@@ -817,20 +855,23 @@ var allRecipes = [
         "ingredient": "Kookaardappels"
       },
       {
-        "quantity": 0.25,
-        "ingredient": "Augurk"
-      },
-      {
-        "quantity": 0.25,
-        "ingredient": "Zilveruitjes"
-      },
-      {
         "quantity": 1,
         "ingredient": "Rookworst"
       },
       {
         "quantity": 1,
         "ingredient": "Jus"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Augurk"
+      },
+      {
+        "ingredient": "Zilveruitjes"
+      },
+      {
+        "ingredient": "Hutspotkruiden"
       }
     ]
   },
@@ -1336,5 +1377,117 @@ var allRecipes = [
       }
     ],
     "optionalIngredients": []
+  },
+  {
+    "name": "Wokratatouille",
+    "category": "Pasta/rijst",
+    "ingredients": [
+      {
+        "quantity": 1,
+        "ingredient": "Ui"
+      },
+      {
+        "quantity": 0.5,
+        "ingredient": "Courgette"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Paprika"
+      },
+      {
+        "quantity": 200,
+        "quantityType": "gram",
+        "ingredient": "Woksaus soja"
+      },
+      {
+        "quantity": 225,
+        "quantityType": "gram",
+        "ingredient": "Witte rijst noedels"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Cherrytomaatjes"
+      },
+      {
+        "quantity": 0.5,
+        "ingredient": "Aubergine"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Zonnebloemolie"
+      }
+    ]
+  },
+  {
+    "name": "Satépannetje",
+    "category": "Pasta/rijst",
+    "ingredients": [
+      {
+        "quantity": 1,
+        "ingredient": "Jumbo Satépannetje met rijst"
+      },
+      {
+        "quantity": 350,
+        "quantityType": "gram",
+        "ingredient": "Kipfilet"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Zonnebloemolie"
+      }
+    ]
+  },
+  {
+    "name": "Traybake Gnocchi",
+    "category": "Traybakes",
+    "ingredients": [
+      {
+        "quantity": 400,
+        "quantityType": "gram",
+        "ingredient": "Gnocchi"
+      },
+      {
+        "quantity": 100,
+        "quantityType": "gram",
+        "ingredient": "Feta"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Ui"
+      },
+      {
+        "quantity": 0.75,
+        "ingredient": "Courgette"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Pesto"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Cherrytomaten"
+      },
+      {
+        "quantity": 0.25,
+        "ingredient": "Rucola"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Olijfolie"
+      },
+      {
+        "ingredient": "Zwarte peper"
+      },
+      {
+        "ingredient": "Bakpapier"
+      }
+    ]
   }
 ]
