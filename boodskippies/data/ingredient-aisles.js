@@ -263,6 +263,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Kibbeling",
+      "aisle": "Diepvries"
+    },
+    {
       "name": "Kip",
       "aisle": "Vlees/koeling"
     },
@@ -453,6 +457,10 @@ var aisleInfo = {
     {
       "name": "Rode peper",
       "aisle": "Groentewinkel"
+    },
+    {
+      "name": "Rode pesto",
+      "aisle": "Wereldstraat"
     },
     {
       "name": "Rode ui",

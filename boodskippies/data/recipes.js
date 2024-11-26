@@ -195,7 +195,6 @@ var allRecipes = [
       }
     ]
   },
-  
   {
     "name": "Zalmschotel",
     "category": "Traybakes",
@@ -1485,6 +1484,39 @@ var allRecipes = [
       {
         "ingredient": "Zwarte peper"
       },
+      {
+        "ingredient": "Bakpapier"
+      }
+    ]
+  },
+  {
+    "name": "Kibbeling traybake",
+    "category": "Traybakes",
+    "ingredients": [
+      {
+        "quantity": 2,
+        "ingredient": "Paprika"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Courgette"
+      },
+      {
+        "quantity": 600,
+        "quantityType": "gram",
+        "ingredient": "Krieltjes"
+      },
+      {
+        "quantity": 450,
+        "quantityType": "gram",
+        "ingredient": "Kibbeling"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Rode pesto"
+      }
+    ],
+    "optionalIngredients": [
       {
         "ingredient": "Bakpapier"
       }
