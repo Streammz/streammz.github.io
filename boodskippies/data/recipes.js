@@ -1,5 +1,57 @@
 var allRecipes = [
   {
+    "name": "Standaard boodschappen nalopen",
+    "category": "Standaard",
+    "ingredients": [],
+    "optionalIngredients": [
+      {
+        "ingredient": "Bakpapier"
+      },
+      {
+        "ingredient": "Limonade"
+      },
+      {
+        "ingredient": "Melk"
+      },
+      {
+        "ingredient": "Fruit"
+      },
+      {
+        "ingredient": "Drinken"
+      },
+      {
+        "ingredient": "Snackla, koekla, mila snacks"
+      },
+      {
+        "ingredient": "Diksap"
+      },
+      {
+        "ingredient": "Drinkyoghurt"
+      },
+      {
+        "ingredient": "WC-papier/keukenpapier"
+      },
+      {
+        "ingredient": "Vuilniszakken"
+      },
+      {
+        "ingredient": "Vriezerzakjes"
+      },
+      {
+        "ingredient": "Boter"
+      },
+      {
+        "ingredient": "Bakboter/olie"
+      },
+      {
+        "ingredient": "Broodbeleg"
+      },
+      {
+        "ingredient": "Kattengrind/korrel"
+      }
+    ]
+  },
+  {
     "name": "Soep met brood",
     "category": "Makkelijk",
     "ingredients": [

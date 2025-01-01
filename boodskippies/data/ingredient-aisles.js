@@ -71,6 +71,10 @@ var aisleInfo = {
       "aisle": "Vlees/koeling"
     },
     {
+      "name": "Bakboter/olie",
+      "aisle": "Zuivel/boter/toetjes"
+    },
+    {
       "name": "Bakpapier",
       "aisle": "Huishouden"
     },
@@ -151,12 +155,24 @@ var aisleInfo = {
       "aisle": "Zuren/sauzen/soepen"
     },
     {
+      "name": "Diksap",
+      "aisle": "Koek/baby"
+    },
+    {
       "name": "Doperwtjes",
       "aisle": "Houdbare groente"
     },
     {
       "name": "Doperwtjes pot",
       "aisle": "Houdbare groente"
+    },
+    {
+      "name": "Drinken",
+      "aisle": "Drinken"
+    },
+    {
+      "name": "Drinkyoghurt",
+      "aisle": "Zuivel/boter/toetjes"
     },
     {
       "name": "Eieren",
@@ -169,6 +185,10 @@ var aisleInfo = {
     {
       "name": "Frituursnacks",
       "aisle": "Diepvries"
+    },
+    {
+      "name": "Fruit",
+      "aisle": "Groentewinkel"
     },
     {
       "name": "Gehakt",
@@ -251,6 +271,10 @@ var aisleInfo = {
       "aisle": "Zuren/sauzen/soepen"
     },
     {
+      "name": "Kattengrind/korrel",
+      "aisle": "Dier"
+    },
+    {
       "name": "Kerriepoeder",
       "aisle": "Kruiden"
     },
@@ -319,6 +343,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Limonade",
+      "aisle": "Drinken"
+    },
+    {
       "name": "Maaltijdpakket Kip Tandoori",
       "aisle": "Wereldstraat"
     },
@@ -337,6 +365,10 @@ var aisleInfo = {
     {
       "name": "Mayo",
       "aisle": "Zuren/sauzen/soepen"
+    },
+    {
+      "name": "Melk",
+      "aisle": "(Af)bakproducten"
     },
     {
       "name": "Moizena",
@@ -503,6 +535,10 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Snackla, koekla, mila snacks",
+      "aisle": "Chips"
+    },
+    {
       "name": "Snijbonen",
       "aisle": "Groentewinkel"
     },
@@ -561,6 +597,18 @@ var aisleInfo = {
     {
       "name": "Volle kwark",
       "aisle": "Zuivel/boter/toetjes"
+    },
+    {
+      "name": "Vriezerzakjes",
+      "aisle": "Huishouden"
+    },
+    {
+      "name": "Vuilniszakken",
+      "aisle": "Huishouden"
+    },
+    {
+      "name": "WC-papier/keukenpapier",
+      "aisle": "Huishouden"
     },
     {
       "name": "Witlof",
