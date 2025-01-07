@@ -48,6 +48,12 @@ var allRecipes = [
       },
       {
         "ingredient": "Kattengrind/korrel"
+      },
+      {
+        "ingredient": "Ei"
+      },
+      {
+        "ingredient": "Brood"
       }
     ]
   },

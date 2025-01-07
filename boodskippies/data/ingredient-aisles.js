@@ -103,6 +103,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Brood",
+      "aisle": "Brood"
+    },
+    {
       "name": "Broodbeleg",
       "aisle": "Broodbeleg"
     },
@@ -173,6 +177,10 @@ var aisleInfo = {
     {
       "name": "Drinkyoghurt",
       "aisle": "Zuivel/boter/toetjes"
+    },
+    {
+      "name": "Ei",
+      "aisle": "Brood"
     },
     {
       "name": "Eieren",
