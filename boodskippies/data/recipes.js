@@ -54,6 +54,12 @@ var allRecipes = [
       },
       {
         "ingredient": "Brood"
+      },
+      {
+        "ingredient": "Appelmoes"
+      },
+      {
+        "ingredient": "Afbakbrood"
       }
     ]
   },
@@ -1579,5 +1585,81 @@ var allRecipes = [
         "ingredient": "Bakpapier"
       }
     ]
+  },
+  {
+    "name": "Prei stamppot",
+    "category": "AVGtje",
+    "ingredients": [
+      {
+        "quantity": 4,
+        "ingredient": "Lekkerbek krokant"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Kookaardappels"
+      },
+      {
+        "quantity": 2,
+        "ingredient": "Prei"
+      },
+      {
+        "quantity": 30,
+        "quantityType": "gram",
+        "ingredient": "Boter"
+      },
+      {
+        "quantity": 0.2,
+        "quantityType": "liter",
+        "ingredient": "Melk"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Bakpapier"
+      }
+    ]
+  },
+  {
+    "name": "Pittig gehakt met rijst",
+    "category": "Pasta/rijst",
+    "ingredients": [
+      {
+        "quantity": 200,
+        "quantityType": "gram",
+        "ingredient": "Rijst"
+      },
+      {
+        "quantity": 340,
+        "quantityType": "gram",
+        "ingredient": "Doperwten"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Knoflook"
+      },
+      {
+        "quantity": 2,
+        "ingredient": "Ui"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Rode peper"
+      },
+      {
+        "quantity": 300,
+        "quantityType": "gram",
+        "ingredient": "Gehakt"
+      },
+      {
+        "quantity": 0.1,
+        "quantityType": "liter",
+        "ingredient": "Oestersaus"
+      },
+      {
+        "quantity": 3,
+        "ingredient": "Ei"
+      }
+    ],
+    "optionalIngredients": []
   }
 ]

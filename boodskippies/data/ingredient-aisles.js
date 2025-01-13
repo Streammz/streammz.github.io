@@ -43,6 +43,10 @@ var aisleInfo = {
       "aisle": "Vlees/koeling"
     },
     {
+      "name": "Afbakbrood",
+      "aisle": "(Af)bakproducten"
+    },
+    {
       "name": "Afbakbroodjes",
       "aisle": "(Af)bakproducten"
     },
@@ -161,6 +165,10 @@ var aisleInfo = {
     {
       "name": "Diksap",
       "aisle": "Koek/baby"
+    },
+    {
+      "name": "Doperwten",
+      "aisle": "Houdbare groente"
     },
     {
       "name": "Doperwtjes",
@@ -311,6 +319,10 @@ var aisleInfo = {
       "aisle": "Vlees/koeling"
     },
     {
+      "name": "Knoflook",
+      "aisle": "Groentewinkel"
+    },
+    {
       "name": "Knoflookpuree",
       "aisle": "Groentewinkel"
     },
@@ -351,6 +363,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Lekkerbek krokant",
+      "aisle": "Diepvries"
+    },
+    {
       "name": "Limonade",
       "aisle": "Drinken"
     },
@@ -388,6 +404,10 @@ var aisleInfo = {
     },
     {
       "name": "Nacho ovenschotel pakket",
+      "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Oestersaus",
       "aisle": "Wereldstraat"
     },
     {
