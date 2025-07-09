@@ -91,6 +91,10 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Bloemkool roosjes",
+      "aisle": "Groentewinkel"
+    },
+    {
       "name": "Boerenkool",
       "aisle": "Groentewinkel"
     },
@@ -151,6 +155,10 @@ var aisleInfo = {
       "aisle": "(Af)bakproducten"
     },
     {
+      "name": "Citroensap",
+      "aisle": "Kruiden"
+    },
+    {
       "name": "Courgette",
       "aisle": "Groentewinkel"
     },
@@ -161,6 +169,10 @@ var aisleInfo = {
     {
       "name": "Curry",
       "aisle": "Zuren/sauzen/soepen"
+    },
+    {
+      "name": "Dezem baguette",
+      "aisle": "(Af)bakproducten"
     },
     {
       "name": "Diksap",
@@ -177,6 +189,10 @@ var aisleInfo = {
     {
       "name": "Doperwtjes pot",
       "aisle": "Houdbare groente"
+    },
+    {
+      "name": "Dopewrten diepvries",
+      "aisle": "Diepvries"
     },
     {
       "name": "Drinken",
@@ -455,6 +471,10 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Peper",
+      "aisle": "Kruiden"
+    },
+    {
       "name": "Perziken blik",
       "aisle": "Houdbare groente"
     },
@@ -513,6 +533,10 @@ var aisleInfo = {
     {
       "name": "Rode curry",
       "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Rode paprika",
+      "aisle": "Groentewinkel"
     },
     {
       "name": "Rode peper",
@@ -575,6 +599,14 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Spekjes",
+      "aisle": "Vlees/koeling"
+    },
+    {
+      "name": "Spekreepjes",
+      "aisle": "Vlees/koeling"
+    },
+    {
       "name": "Sperziebonen",
       "aisle": "Groentewinkel"
     },
@@ -603,6 +635,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Tacokruidenmix (Santa Maria)",
+      "aisle": "Wereldstraat"
+    },
+    {
       "name": "Tagliatelle",
       "aisle": "Wereldstraat"
     },
@@ -611,8 +647,20 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Tomaat",
+      "aisle": "Groentewinkel"
+    },
+    {
       "name": "Tomatenpuree",
       "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Tortellini kaas",
+      "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Tuinbonen",
+      "aisle": "Groentewinkel"
     },
     {
       "name": "Ui",

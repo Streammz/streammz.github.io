@@ -383,7 +383,7 @@ var allRecipes = [
     "category": "Makkelijk",
     "ingredients": [
       {
-        "quantity": 2,
+        "quantity": 1,
         "ingredient": "Afbakbroodjes"
       }
     ],
@@ -897,13 +897,13 @@ var allRecipes = [
         "quantity": 75,
         "quantityType": "gram",
         "ingredient": "Geraspte kaas"
-      },
-      {
-        "quantity": 0.5,
-        "ingredient": "Runderbouillonblokje"
       }
     ],
-    "optionalIngredients": []
+    "optionalIngredients": [
+      {
+        "ingredient": "Runderbouillonblokje"
+      }
+    ]
   },
   {
     "name": "Boerenkool",
@@ -1661,5 +1661,156 @@ var allRecipes = [
       }
     ],
     "optionalIngredients": []
+  },
+  {
+    "name": "Tuinbonen",
+    "category": "AVGtje",
+    "ingredients": [
+      {
+        "quantity": 450,
+        "quantityType": "gram",
+        "ingredient": "Tuinbonen"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Spekjes"
+      },
+      {
+        "quantity": 450,
+        "quantityType": "gram",
+        "ingredient": "Krieltjes"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Knoflook"
+      },
+      {
+        "ingredient": "Citroensap"
+      },
+      {
+        "ingredient": "Peper"
+      }
+    ]
+  },
+  {
+    "name": "Tortellini",
+    "category": "Pasta/rijst",
+    "ingredients": [
+      {
+        "quantity": 250,
+        "quantityType": "gram",
+        "ingredient": "Tortellini kaas"
+      },
+      {
+        "quantity": 50,
+        "quantityType": "gram",
+        "ingredient": "Kookroom"
+      },
+      {
+        "quantity": 200,
+        "quantityType": "gram",
+        "ingredient": "Dopewrten diepvries"
+      },
+      {
+        "quantity": 100,
+        "quantityType": "gram",
+        "ingredient": "Hamblokjes"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Groentenbouillon"
+      }
+    ]
+  },
+  {
+    "name": "Broodschotel spinazie",
+    "category": "AVGtje",
+    "ingredients": [
+      {
+        "quantity": 250,
+        "quantityType": "gram",
+        "ingredient": "Dezem baguette"
+      },
+      {
+        "quantity": 2,
+        "ingredient": "Ui"
+      },
+      {
+        "quantity": 200,
+        "quantityType": "gram",
+        "ingredient": "Spekreepjes"
+      },
+      {
+        "quantity": 400,
+        "quantityType": "gram",
+        "ingredient": "Spinazie"
+      },
+      {
+        "quantity": 4,
+        "ingredient": "Ei"
+      },
+      {
+        "quantity": 100,
+        "quantityType": "gram",
+        "ingredient": "Geraspte kaas"
+      },
+      {
+        "quantity": 0.2,
+        "quantityType": "liter",
+        "ingredient": "Melk"
+      }
+    ],
+    "optionalIngredients": []
+  },
+  {
+    "name": "Mexicaanse Ovenschotel",
+    "category": "AVGtje",
+    "ingredients": [
+      {
+        "quantity": 1,
+        "ingredient": "Ui"
+      },
+      {
+        "quantity": 300,
+        "quantityType": "gram",
+        "ingredient": "Gehakt"
+      },
+      {
+        "quantity": 4,
+        "ingredient": "Tomaat"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Rode paprika"
+      },
+      {
+        "quantity": 200,
+        "quantityType": "gram",
+        "ingredient": "Bloemkool roosjes"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Mais"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Tacokruidenmix (Santa Maria)"
+      },
+      {
+        "quantity": 150,
+        "quantityType": "gram",
+        "ingredient": "Geraspte kaas"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Knoflook"
+      },
+      {
+        "ingredient": "Olijfolie"
+      }
+    ]
   }
 ]
