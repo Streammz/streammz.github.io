@@ -461,12 +461,13 @@ var allRecipes = [
         "ingredient": "Prei"
       },
       {
-        "quantity": 1,
-        "ingredient": "Ketjap"
-      },
-      {
-        "quantity": 2,
+        "quantity": 3,
         "ingredient": "Saté"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Ketjap"
       }
     ]
   },
