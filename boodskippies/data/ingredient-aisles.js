@@ -355,6 +355,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Komijnpoeder",
+      "aisle": "Kruiden"
+    },
+    {
       "name": "Komkommer",
       "aisle": "Groentewinkel"
     },
@@ -369,6 +373,10 @@ var aisleInfo = {
     {
       "name": "Krieltjes",
       "aisle": "Groente/fruit"
+    },
+    {
+      "name": "Kruidenboter broodjes",
+      "aisle": "Kruiden"
     },
     {
       "name": "Lasagne maaltijdpakket Honig",
@@ -651,6 +659,10 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Tomatenblokjes",
+      "aisle": "Groente/fruit"
+    },
+    {
       "name": "Tomatenpuree",
       "aisle": "Wereldstraat"
     },
@@ -729,6 +741,10 @@ var aisleInfo = {
     {
       "name": "Zonnebloemolie",
       "aisle": "Zuren/sauzen/soepen"
+    },
+    {
+      "name": "Zout",
+      "aisle": "Kruiden"
     },
     {
       "name": "Zwarte peper",

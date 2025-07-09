@@ -1812,5 +1812,55 @@ var allRecipes = [
         "ingredient": "Olijfolie"
       }
     ]
+  },
+  {
+    "name": "Shakshuka",
+    "category": "Makkelijk",
+    "ingredients": [
+      {
+        "quantity": 0.8,
+        "quantityType": "liter",
+        "ingredient": "Tomatenblokjes"
+      },
+      {
+        "quantity": 3,
+        "ingredient": "Ei"
+      },
+      {
+        "quantity": 2,
+        "ingredient": "Paprika"
+      },
+      {
+        "quantity": 2,
+        "ingredient": "Ui"
+      },
+      {
+        "quantity": 2,
+        "ingredient": "Kruidenboter broodjes"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Knoflook"
+      },
+      {
+        "ingredient": "Komijnpoeder"
+      },
+      {
+        "ingredient": "Paprikapoeder"
+      },
+      {
+        "ingredient": "Peterselie"
+      },
+      {
+        "ingredient": "Zout"
+      },
+      {
+        "ingredient": "Peper"
+      },
+      {
+        "ingredient": "Olijfolie"
+      }
+    ]
   }
 ]
