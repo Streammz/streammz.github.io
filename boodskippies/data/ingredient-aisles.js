@@ -283,6 +283,10 @@ var aisleInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Japanse mayonaise",
+      "aisle": "Wereldstraat"
+    },
+    {
       "name": "Jumbo Satépannetje met rijst",
       "aisle": "Wereldstraat"
     },
@@ -371,8 +375,16 @@ var aisleInfo = {
       "aisle": "Zuivel/boter/toetjes"
     },
     {
+      "name": "Krabsticks",
+      "aisle": "Vlees/koeling"
+    },
+    {
       "name": "Krieltjes",
       "aisle": "Groente/fruit"
+    },
+    {
+      "name": "Kroepoek",
+      "aisle": "Wereldstraat"
     },
     {
       "name": "Kruidenboter broodjes",
@@ -409,6 +421,10 @@ var aisleInfo = {
     {
       "name": "Mais",
       "aisle": "Houdbare groente"
+    },
+    {
+      "name": "Mango",
+      "aisle": "Groente/fruit"
     },
     {
       "name": "Mayo",
@@ -475,6 +491,10 @@ var aisleInfo = {
       "aisle": "Diepvries"
     },
     {
+      "name": "Peen Julienne",
+      "aisle": "Groente/fruit"
+    },
+    {
       "name": "Peen julienne",
       "aisle": "Groentewinkel"
     },
@@ -523,6 +543,10 @@ var aisleInfo = {
       "aisle": "(Af)bakproducten"
     },
     {
+      "name": "Poke sauce",
+      "aisle": "Wereldstraat"
+    },
+    {
       "name": "Prei",
       "aisle": "Groentewinkel"
     },
@@ -532,6 +556,10 @@ var aisleInfo = {
     },
     {
       "name": "Rijst",
+      "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Rijst-azijn",
       "aisle": "Wereldstraat"
     },
     {
@@ -579,6 +607,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Saitaku pokérijst",
+      "aisle": "Wereldstraat"
+    },
+    {
       "name": "Sambal",
       "aisle": "Wereldstraat"
     },
@@ -605,6 +637,14 @@ var aisleInfo = {
     {
       "name": "Soep",
       "aisle": "Groentewinkel"
+    },
+    {
+      "name": "Sojabonen",
+      "aisle": "Diepvries"
+    },
+    {
+      "name": "Sojasaus",
+      "aisle": "Wereldstraat"
     },
     {
       "name": "Spekjes",
@@ -737,6 +777,10 @@ var aisleInfo = {
     {
       "name": "Zilveruitjes",
       "aisle": "Zuren/sauzen/soepen"
+    },
+    {
+      "name": "Zoetzure rode uienringen",
+      "aisle": "Houdbare groente"
     },
     {
       "name": "Zonnebloemolie",

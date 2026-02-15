@@ -208,12 +208,9 @@ var allRecipes = [
       {
         "quantity": 1,
         "ingredient": "Aardappelgratin"
-      },
-      {
-        "quantity": 1,
-        "ingredient": "Kaassaus"
       }
-    ]
+    ],
+    "optionalIngredients": []
   },
   {
     "name": "Sperziebonen",
@@ -463,6 +460,10 @@ var allRecipes = [
       {
         "quantity": 3,
         "ingredient": "Saté"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Kroepoek"
       }
     ],
     "optionalIngredients": [
@@ -1495,6 +1496,10 @@ var allRecipes = [
         "quantity": 350,
         "quantityType": "gram",
         "ingredient": "Kipfilet"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Kroepoek"
       }
     ],
     "optionalIngredients": [
@@ -1861,6 +1866,62 @@ var allRecipes = [
       },
       {
         "ingredient": "Olijfolie"
+      }
+    ]
+  },
+  {
+    "name": "Pokebowl",
+    "category": "Uitgebreid",
+    "ingredients": [
+      {
+        "quantity": 3,
+        "ingredient": "Saitaku pokérijst"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Kip"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Komkommer"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Mango"
+      },
+      {
+        "quantity": 120,
+        "quantityType": "gram",
+        "ingredient": "Sojabonen"
+      },
+      {
+        "quantity": 150,
+        "quantityType": "gram",
+        "ingredient": "Peen Julienne"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Krabsticks"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Rijst-azijn"
+      },
+      {
+        "ingredient": "Sojasaus"
+      },
+      {
+        "ingredient": "Honing"
+      },
+      {
+        "ingredient": "Zoetzure rode uienringen"
+      },
+      {
+        "ingredient": "Japanse mayonaise"
+      },
+      {
+        "ingredient": "Poke sauce"
       }
     ]
   }
