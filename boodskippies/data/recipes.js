@@ -1116,10 +1116,11 @@ var allRecipes = [
         "ingredient": "Geraspte kaas"
       },
       {
-        "quantity": 0.5,
+        "quantity": 1,
         "ingredient": "Courgette"
       }
-    ]
+    ],
+    "optionalIngredients": []
   },
   {
     "name": "Rode curry",
@@ -1189,7 +1190,7 @@ var allRecipes = [
         "ingredient": "Geraspte kaas"
       },
       {
-        "quantity": 0.5,
+        "quantity": 1,
         "ingredient": "Courgette"
       }
     ],
