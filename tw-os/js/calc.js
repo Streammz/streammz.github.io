@@ -125,18 +125,18 @@ function calcOptimalSupportExpectations(data) {
     data.sortedTowns.forEach(town => {
         var closestTowns;
         town.surplus.forEach((surplus, surplusIdx) => {
-            if (surplus < 0) {
+            if (surplus > 0) {
                 closestTowns = closestTowns || ([... data.sortedTowns].sort((a, b) => calcDist(town, a) - calcDist(town, b)));
-                // Find the best towns to request these from
-                for (var i=0; i<closestTowns.length && surplus < 0; i++) {
-                    if (closestTowns[i].surplus[surplusIdx] > 0) {
+                // Find the best towns to send these to
+                for (var i=0; i<closestTowns.length && surplus > 0; i++) {
+                    if (closestTowns[i].surplus[surplusIdx] < 0) {
                         var toGive = Array(data.troopAmount).fill(0);
-                        toGive[surplusIdx] = Math.min(closestTowns[i].surplus[surplusIdx], -surplus);
-                        data.expectedSupport.push({ from: closestTowns[i].name, to: town.name, troops: toGive });
+                        toGive[surplusIdx] = Math.min(-closestTowns[i].surplus[surplusIdx], surplus);
+                        data.expectedSupport.push({ from: town.name, to: closestTowns[i].name, troops: toGive });
 
-                        closestTowns[i].surplus = subtractTroops(data, closestTowns[i].surplus, toGive);
-                        town.surplus = addTroops(data, town.surplus, toGive);
-                        surplus += toGive[surplusIdx];
+                        closestTowns[i].surplus = addTroops(data, closestTowns[i].surplus, toGive);
+                        town.surplus = subtractTroops(data, town.surplus, toGive);
+                        surplus -= toGive[surplusIdx];
                     }
                 }
             }
