@@ -8,6 +8,7 @@ $(function () {
     readLocalStorage('prios');
     readLocalStorage('minimums');
     readLocalStorage('support');
+    readLocalStorage('support-otw');
 });
 
 function calc() {
@@ -16,6 +17,7 @@ function calc() {
     storeLocalStorage('prios');
     storeLocalStorage('minimums');
     storeLocalStorage('support');
+    storeLocalStorage('support-otw');
 
     var data = {};
     readGroups(data);
@@ -23,6 +25,7 @@ function calc() {
     readPrios(data);
     readMinimums(data);
     readSupport(data);
+    readSupportOnTheWay(data);
 
     calcAvailableTroops(data);
     calcWantedTroops(data);
@@ -42,12 +45,14 @@ function renderWantedTroops(data, tableName) {
     var thead = $('<thead />').appendTo(table);
     var thRow = $('<tr />').appendTo(thead);
     thRow.append('<th>Town</th>')
+    thRow.append('<th>Prio</th>')
     thRow.append($('<th>Troops</th>').attr('colspan', data.troopAmount));
     var tbody = $('<tbody />').appendTo(table);
 
     Object.keys(data.towns).forEach(key => {
         var row = $('<tr />').appendTo(tbody);
         $('<td />').text(key).appendTo(row);
+        $('<td />').text(data.towns[key].prio).attr('title', data.towns[key].prioSrc).appendTo(row);
         data.towns[key].wantedTroops.forEach(val => $('<td />').text(val == -1 ? 0 : val).addClass(val <= 0 ? 'color-gray' : 'color-black').appendTo(row));
     });
 }
@@ -61,9 +66,14 @@ function renderSupport(data, tableName, supportObj) {
     thRow.append($('<th>Troops</th>').attr('colspan', data.troopAmount));
     var tbody = $('<tbody />').appendTo(table);
 
+    var prevRowFrom;
     supportObj.forEach(support => {
         var row = $('<tr />').appendTo(tbody);
-        $('<td />').text(support.from).appendTo(row);
+        if (prevRowFrom !== support.from) {
+            var times = supportObj.filter(o => o.from == support.from).length;
+            $('<td />').text(support.from).attr('rowspan', times).appendTo(row);
+            prevRowFrom = support.from
+        }
         $('<td />').text(support.to).appendTo(row);
         support.troops.forEach(val => $('<td />').text(val).addClass(val == 0 ? 'color-gray' : val > 0 ? 'color-black' : 'color-red').appendTo(row));
     });
@@ -177,7 +187,13 @@ function calcRemainderSupport(data) {
     });
 
     data.remainingSupport = mergeSupports(data, data.remainingSupport);
-    data.remainingSupport.sort((a, b) => (a.from + a.to).localeCompare(b.from + b.to));
+    data.remainingSupport = seperateSupportIntoPositiveNegative(data, data.remainingSupport);
+    data.remainingSupport.sort((a, b) => sorter(a).localeCompare(sorter(b)));
+
+    function sorter(x) {
+        var isBackSupport = x.troops.filter(o => o > 0).length == 0;
+        return x.from + '-' + (isBackSupport ? 'a' : 'b') + '-' + x.to;
+    }
 }
 
 function readGroups(data) {
@@ -246,7 +262,7 @@ function readPrios(data) {
         var prio = +lineData[0];
         var pointTreshold = /^\d+$/.test(lineData[1]) ? +lineData[1] : 0;
         var groups = lineData.slice(pointTreshold > 0 ? 2 : 1);
-        data.prios.push({ prio, pointTreshold, groups });
+        data.prios.push({ prio, pointTreshold, groups, src: lines[i] });
     }
 
     Object.keys(data.towns).forEach(key => {
@@ -255,8 +271,9 @@ function readPrios(data) {
             if (town.points <= p.pointTreshold) return false;
             if (p.groups.filter(pg => town.groups.filter(tg => tg == pg).length > 0).length < p.groups.length) return false;
             return true;
-        })[0] || { prio: 1 }).prio;
-        data.towns[key].prio = prio;
+        })[0] || { prio: 1, src: 'none' });
+        data.towns[key].prio = prio.prio;
+        data.towns[key].prioSrc = prio.src;
     });
 
     data.sortedTowns = Object.keys(data.towns).map(o => data.towns[o]).sort((t1, t2) => t2.prio - t1.prio);
@@ -288,6 +305,14 @@ function readSupport(data) {
             i++; // Skip noble data point
         }
     }
+}
+
+function readSupportOnTheWay(data) {
+    data.support = data.support || [];
+    var val = $('#support-otw').val();
+
+    var valJson = JSON.parse(val);
+    data.support = [... data.support, ... valJson];
 }
 
 function storeLocalStorage(name) {
@@ -340,4 +365,24 @@ function mergeSupports(data, supports) {
             troops: addTroops.apply(this, [data, ...subSupports.map(o => o.troops)])
         };
     });
+}
+
+function seperateSupportIntoPositiveNegative(data, supports) {
+    return supports.map(support => {
+        if (support.troops.filter(o => o > 0).length && support.troops.filter(o => o < 0).length) {
+            return [
+                {
+                    from: support.from, 
+                    to: support.to,
+                    troops: support.troops.map(o => o < 0 ? o : 0),
+                },
+                {
+                    from: support.from, 
+                    to: support.to,
+                    troops: support.troops.map(o => o > 0 ? o : 0),
+                }
+            ];
+        }
+        return [ support ];
+    }).flatMap(supportList => supportList);
 }
