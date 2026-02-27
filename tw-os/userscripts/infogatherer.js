@@ -12,11 +12,12 @@
 (function($) {
     'use strict';
 
+    var coordRegex = /\((\d{3})\|(\d{3})\)/;
     var expectedPages = [
         '&screen=overview_villages&mode=groups',
         '&screen=am_troops',
         '&screen=overview_villages&mode=units&type=support_detail&filter_villages=1',
-        '&screen=overview_villages&mode=incomings&subtype=supports',
+        '&screen=overview_villages&mode=commands',
     ];
 
     var btnNext = $('<div class="quest" />').appendTo($(".questlog"));
@@ -74,23 +75,18 @@
         btnCopy = $('<div class="quest" />').appendTo($('.questlog'));
         btnCopy.css('background-image', 'url(https://cdn-icons-png.flaticon.com/16/1103/1103440.png)');
         btnCopy.on('click', () => {
-            var detailsCache = window.Command.details_cache;
-            var trs = $('#incomings_table tr.nowrap');
-            if (Object.keys(detailsCache).length != trs.length) { alert('Not all commands cached'); }
+            var trs = $('#commands_table tr.nowrap');
 
             var result = [];
-            Object.keys(detailsCache).forEach(key => {
-                var fromId = detailsCache[key].village_start.id;
-                var fromName = $('a[href*="&id=' + fromId + '"]').text();
-                fromName = fromName.substr(0, fromName.indexOf('(') - 1);
-
-                var toId = detailsCache[key].village_target.id;
-                var toName = $('a[href*="&id=' + toId + '"]').text();
-                toName = toName.substr(0, toName.indexOf('(') - 1);
-
-                var troops = Object.keys(detailsCache[key].units).map(troopkey => +detailsCache[key].units[troopkey].count);
-
-                result.push({ from: fromName, to: toName, troops });
+            trs.each((idx, el) => {
+                var category = $(el).find('.own_command').attr('data-command-type');
+                var src, dst, troops;
+                if (category == 'support') {
+                    src = /(.*) \(/.exec($(el).find('td:nth-child(2) a').text())[1].trim();
+                    dst = /Ondersteuning voor (.+) \(/.exec($(el).find('.quickedit').text())[1].trim();
+                    troops = $(el).find('.unit-item').map((idx, el) => +$(el).text()).toArray();
+                    result.push({ from: src, to: dst, troops });
+                }
             });
 
             var textarea = document.createElement("textarea");

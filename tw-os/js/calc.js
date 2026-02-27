@@ -313,6 +313,11 @@ function readSupportOnTheWay(data) {
 
     var valJson = JSON.parse(val);
     data.support = [... data.support, ... valJson];
+
+    data.support.forEach(sup => {
+        while (sup.troops.length > data.troopAmount) sup.troops.pop();
+    });
+    data.support = mergeSupports(data, data.support);
 }
 
 function storeLocalStorage(name) {
