@@ -8,6 +8,7 @@ $(function () {
     readLocalStorage('nobletargets');
     readLocalStorage('targets');
     readLocalStorage('faketargets');
+    readLocalStorage('arrivaltime');
 });
 
 function calc() {
@@ -16,11 +17,13 @@ function calc() {
     storeLocalStorage('nobletargets');
     storeLocalStorage('targets');
     storeLocalStorage('faketargets');
+    storeLocalStorage('arrivaltime');
 
     var data = {};
     readTroops(data);
     readNoblers(data);
     readTargets(data);
+    readArrivalTime(data);
 
     calcTravelTimes(data);
 
@@ -44,13 +47,23 @@ function renderTravelTimes(data) {
 
     data.sortedTowns.forEach(town => {
         var row = $('<tr />').appendTo(tbody);
-        $('<th />').text(town.name).appendTo(row);
+        var armySize = town.armySize > 15000 ? 'large' : town.armySize > 8000 ? 'medium' : town.armySize > 3000 ? 'small' : 'tiny'
+        $('<th />').text(town.name).appendTo(row).addClass('icon-' + armySize + 'atk');
         data.targets.forEach(target => {
             var td = $('<td>').appendTo(row);
             var addTime = (time, unit) => {
+                var arrivalTime = data.arrivalTime ?
+                    new Date(new Date(data.arrivalTime).setSeconds(-time)) :
+                    null;
+                if (arrivalTime - new Date() < 0) return; 
                 $('<span />')
-                    .text(timeToString(time)).addClass('time time-' + unit)
+                    .text(timeToString(time)).addClass('time icon-' + unit)
                     .attr('data-time', time)
+                    .attr('data-from', JSON.stringify(town.coords))
+                    .attr('data-to', JSON.stringify(target.coords))
+                    .attr('data-unit', unit)
+                    .attr('data-arrival', arrivalTime ? arrivalTime.toISOString() : '')
+                    .attr('title', arrivalTime ? 'Send time: ' + friendlyTimeString(arrivalTime) : '')
                     .appendTo(td);
             };
             if (town.currentTroops[5] > 0)
@@ -64,8 +77,11 @@ function renderTravelTimes(data) {
             if (town.nobler)
                 addTime(target.travelTimes[town.name].noble, 'noble')
         });
+
+        if (row.find('.time').length == 0) row.remove();
     });
 
+    // Hover-highlight similar times
     table.on('mouseover', '.time', (ev) => {
         $(table).find('.hover-highlight').removeClass('hover-highlight');
         
@@ -78,11 +94,34 @@ function renderTravelTimes(data) {
             }).toArray();
             each.sort((a, b) => a.diff - b.diff);
             
-            $(each[0].el).addClass('hover-highlight');
-        })
+            $(each[0].el)
+                .addClass('hover-highlight')
+                .toggleClass('close-match', each[0].diff < 600);
+        });
     });
+
+    // Proper highlight on click
     table.on('click', '.time', (ev) => {
         $(ev.target).toggleClass('highlight');
+        renderResultChart(data);
+    });
+}
+
+function renderResultChart(data) {
+    var table = $('#result-chart tbody').html('');
+    var highlightedTimes = $('.time.highlight').toArray();
+    highlightedTimes.sort((a, b) => $(b).attr('data-time') - $(a).attr('data-time'));
+    highlightedTimes.forEach((el) => {
+        var $el = $(el);
+        var tr = $('<tr />').appendTo(table);
+        var fromCoords = JSON.parse($el.attr('data-from'));
+        var from = data.sortedTowns.filter(o => o.coords.x == fromCoords.x && o.coords.y == fromCoords.y)[0];
+        var toCoords = JSON.parse($el.attr('data-to'));
+        var to = data.targets.filter(o => o.coords.x == toCoords.x && o.coords.y == toCoords.y)[0];
+        $('<td />').text(from.name).appendTo(tr);
+        $('<td />').append($('<span />').addClass('icon-' + $el.attr('data-unit'))).appendTo(tr);
+        $('<td />').html(to.name + '<br />' + to.coords.x + '|' + to.coords.y).appendTo(tr);
+        $('<td />').html(friendlyTimeString(new Date($el.attr('data-arrival')))).appendTo(tr);
     });
 }
 
@@ -110,6 +149,7 @@ function readTroops(data) {
     Object.keys(data.towns).forEach(townKey => {
         var town = data.towns[townKey];
         town.armySize = (town.currentTroops[2]) + (town.currentTroops[5] * 4) + (town.currentTroops[6] * 5);
+        if (town.currentTroops.reduce((a, b) => a+b, 0) == 0) delete data.towns[townKey];
     });
     data.sortedTowns = Object.keys(data.towns).map(key => data.towns[key]).sort((a, b) => b.armySize - a.armySize);
 }
@@ -139,6 +179,11 @@ function readTargets(data) {
             continue;
         }
     }
+}
+
+function readArrivalTime(data) {
+    var val = new Date(new Date($('#arrivaltime').val()).toISOString());
+    data.arrivalTime = val;
 }
 
 function calcTravelTimes(data) {
@@ -173,6 +218,22 @@ function timeToString(seconds) {
     var seconds = Math.floor(seconds % 60);
 
     return hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
+}
+
+function friendlyTimeString(date) {
+    if (!date) return '';
+
+    var now = new Date();
+    var isTooLate = (date - now) <= 0;
+    if (isTooLate) return 'TOO LATE';
+
+    var isToday = (date - now) < 20*60*60*1000;
+
+    if (isToday) {
+        return date.toLocaleTimeString('nl-NL');
+    } else {
+        return date.toLocaleString('nl-NL')
+    }
 }
 
 function storeLocalStorage(name) {

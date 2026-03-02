@@ -15,13 +15,20 @@
             opacity: 0.3;
         }
 
-        .time { display: block; }
-        .time.time-lc::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_light.webp') }
-        .time.time-axe::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_axe.webp') }
-        .time.time-sword::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_sword.webp') }
-        .time.time-ram::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_ram.webp') }
-        .time.time-noble::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_snob.webp') }
-        .time.hover-highlight { background-color: #ffff0044; }
+        .icon-lc::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_light.webp') }
+        .icon-axe::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_axe.webp') }
+        .icon-sword::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_sword.webp') }
+        .icon-ram::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_ram.webp') }
+        .icon-noble::before { content:url('https://dsnl.innogamescdn.com/asset/c4af3446/graphic/unit/unit_snob.webp') }
+
+        .icon-tinyatk::before { content:url('https://dsnl.innogamescdn.com/asset/c9b60b77/graphic/command/attack.webp') }
+        .icon-smallatk::before { content:url('https://dsnl.innogamescdn.com/asset/c9b60b77/graphic/command/attack_small.webp') }
+        .icon-mediumatk::before { content:url('https://dsnl.innogamescdn.com/asset/c9b60b77/graphic/command/attack_medium.webp') }
+        .icon-largeatk::before { content:url('https://dsnl.innogamescdn.com/asset/c9b60b77/graphic/command/attack_large.webp') }
+
+        .time { display: block; white-space: pre }
+        .time.hover-highlight { background-color: #ffff0022; }
+        .time.hover-highlight.close-match { background-color: #ffff0080; }
         .time.highlight { background-color: #00ff0044; }
     </style>
 </head>
@@ -42,7 +49,7 @@
             </div>
             <div class="col-sm">
                 <h1>Theirs</h1>
-                <div class="form-group">
+                <div class="form-group" style="display: none">
                     <label for="nobletargets">Enter your noble targets</label>
                     <textarea id="nobletargets" class="form-control" rows="4"></textarea>
                 </div>
@@ -50,9 +57,17 @@
                     <label for="targets">Enter your clear targets</label>
                     <textarea id="targets" class="form-control" rows="8"></textarea>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display: none">
                     <label for="faketargets">Enter your fake targets</label>
                     <textarea id="faketargets" class="form-control" rows="8"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="arrivaltime">Arrival time</label>
+                    <input id="arrivaltime" class="form-control" type="datetime-local"></textarea>
                 </div>
             </div>
         </div>
@@ -67,6 +82,23 @@
             <div class="col-sm">
                 <p>Times</p>
                 <table id="time-chart" class="table"></table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <p>Send times (highlight in table above first)</p>
+                <table id="result-chart" class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px">From</th>
+                            <th style="width: 30px">Unit</th>
+                            <th style="width: 200px">To</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
