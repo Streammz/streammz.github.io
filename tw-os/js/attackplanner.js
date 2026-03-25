@@ -48,7 +48,10 @@ function renderTravelTimes(data) {
     data.sortedTowns.forEach(town => {
         var row = $('<tr />').appendTo(tbody);
         var armySize = town.armySize > 15000 ? 'large' : town.armySize > 8000 ? 'medium' : town.armySize > 3000 ? 'small' : 'tiny'
-        $('<th />').text(town.name).appendTo(row).addClass('icon-' + armySize + 'atk');
+        $('<th />').text(town.name)
+            .addClass('icon-' + armySize + 'atk')
+            .attr('title', town.currentTroops[2] + ' axe, ' + town.currentTroops[5] + ' lc, ' + town.currentTroops[8] + ' ram')
+            .appendTo(row);
         data.targets.forEach(target => {
             var td = $('<td>').appendTo(row);
             var addTime = (time, unit) => {
@@ -82,7 +85,7 @@ function renderTravelTimes(data) {
     });
 
     // Hover-highlight similar times
-    table.on('mouseover', '.time', (ev) => {
+    table.off('mouseover', '.time').on('mouseover', '.time', (ev) => {
         $(table).find('.hover-highlight').removeClass('hover-highlight');
         
         var timeToMatch = $(ev.target).data('time');
@@ -101,7 +104,7 @@ function renderTravelTimes(data) {
     });
 
     // Proper highlight on click
-    table.on('click', '.time', (ev) => {
+    table.off('click', '.time').on('click', '.time', (ev) => {
         $(ev.target).toggleClass('highlight');
         renderResultChart(data);
     });

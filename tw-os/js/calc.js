@@ -6,7 +6,7 @@ $(function () {
     readLocalStorage('groups');
     readLocalStorage('troops');
     readLocalStorage('prios');
-    readLocalStorage('minimums');
+    readLocalStorage('trooprules');
     readLocalStorage('support');
     readLocalStorage('support-otw');
 });
@@ -15,7 +15,7 @@ function calc() {
     storeLocalStorage('groups');
     storeLocalStorage('troops');
     storeLocalStorage('prios');
-    storeLocalStorage('minimums');
+    storeLocalStorage('trooprules');
     storeLocalStorage('support');
     storeLocalStorage('support-otw');
 
@@ -23,7 +23,7 @@ function calc() {
     readGroups(data);
     readTroops(data);
     readPrios(data);
-    readMinimums(data);
+    readTroopRules(data);
     readSupport(data);
     readSupportOnTheWay(data);
 
@@ -83,44 +83,121 @@ function calcAvailableTroops(data) {
     data.availableTroops = Array(data.troopAmount).fill(0);
     data.sortedTowns.forEach(town => {
         town.currentTroops.forEach((val, idx) => data.availableTroops[idx] += val);
+        town.wantedTroops = Array(data.troopAmount).fill(0);
     });
 }
 
 function calcWantedTroops(data) {
-    data.spentTroops = Array(data.troopAmount).fill(0);
-    
-    // Spend minimum troops first
-    data.sortedTowns.forEach((town, townIdx) => {
-        town.wantedTroops = Array(data.troopAmount).fill(0);
-        for (var i=0; i<data.troopAmount; i++) {
-            if (data.minimums[i] > 0) {
-                var neededForAllTowns = data.minimums[i] * data.townCount;
-                var spend;
-                if (data.availableTroops[i] < neededForAllTowns) {
-                    spend = Math.floor(data.availableTroops[i] / data.townCount) + (data.availableTroops[i] % data.townCount < townIdx ? 0 : 1);
-                }
-                else {
-                    spend = data.minimums[i];
-                }
-                data.spentTroops[i] += spend;
-                town.wantedTroops[i] += spend;
-            } else town.wantedTroops[i] = -1;
-        }
-    });
-    data.spentTroops.forEach((o, idx) => data.availableTroops[idx] -= o);
+    for (var troopIdx=0; troopIdx<data.troopAmount; troopIdx++) {
+        var rule = data.troopRules[troopIdx];
 
-    // Spend remaining troops
-    data.totalPrio = data.sortedTowns.reduce((a, b) => a + b.prio, 0)
-    data.sortedTowns.forEach((town, townIdx) => {
-        for (var i=0; i<data.troopAmount; i++) {
-            if (data.minimums[i] >= 0) {
-                var portion = (data.totalPrio - data.townCount) / (town.prio - 1);
-                var spend = Math.floor(data.availableTroops[i] / portion) + (data.availableTroops[i] % portion < townIdx ? 0 : 1);
-                data.spentTroops[i] += spend;
-                town.wantedTroops[i] += spend;
+        if (rule.keepIfAbove) {
+            data.sortedTowns.forEach((town) => {
+                if (town.currentTroops[troopIdx] > rule.keepIfAbove) {
+                    data.availableTroops[troopIdx] -= town.currentTroops[troopIdx];
+                    town.wantedTroops[troopIdx] += town.currentTroops[troopIdx];
+                }
+            });
+        }
+
+        if (rule.keepIfAvailable) {
+            data.sortedTowns.forEach((town) => {
+                if (town.wantedTroops[troopIdx] < rule.keepIfAvailable && town.currentTroops[troopIdx] > town.wantedTroops[troopIdx]) {
+                    var spend = Math.min(town.currentTroops[troopIdx], rule.keepIfAvailable);
+                    spend -= town.wantedTroops[troopIdx];
+
+                    data.availableTroops[troopIdx] -= spend;
+                    town.wantedTroops[troopIdx] += spend;
+                }
+            })
+        }
+
+        if (rule.minimum) {
+            var neededForAllTowns = data.sortedTowns.reduce((a, b) => a + Math.max(0, rule.minimum - b.wantedTroops[troopIdx]), 0);
+            if (data.availableTroops[troopIdx] >= neededForAllTowns) {
+                // We can fill up minimums for all towns
+                data.sortedTowns.forEach((town) => {
+                    if (town.wantedTroops[troopIdx] < rule.minimum) {
+                        var spend = rule.minimum - town.wantedTroops[troopIdx];
+                        data.availableTroops[troopIdx] -= spend;
+                        town.wantedTroops[troopIdx] += spend;
+                    }
+                });
+            } else {
+                // We can't fill up minimums, try to fill up as best as we can.
+                var townsToFill = data.sortedTowns.filter(town => town.wantedTroops[troopIdx] < rule.minimum);
+                townsToFill.sort((a, b) => a.wantedTroops[troopIdx] - b.wantedTroops[troopIdx]);
+
+                for (var i=1; i<townsToFill.length+1; i++) {
+                    var diff = (i == townsToFill.length ? rule.minimum : townsToFill[i].wantedTroops[troopIdx]) - townsToFill[i-1].wantedTroops[troopIdx];
+                    var toAdd = diff * i;
+                    if (toAdd <= data.availableTroops[troopIdx]) {
+                        for (var j=0; j<i; j++) {
+                            townsToFill[j].wantedTroops[troopIdx] += diff
+                            data.availableTroops[troopIdx] -= diff;
+                        }
+                    }
+                    else {
+                        diff = Math.floor(data.availableTroops[troopIdx] / i);
+                        var roundOffIndex = data.availableTroops[troopIdx] % i;
+                        for (var j=0; j<i; j++) {
+                            townsToFill[j].wantedTroops[troopIdx] += diff + (roundOffIndex > j ? 1 : 0);
+                            data.availableTroops[troopIdx] -= diff + (roundOffIndex > j ? 1 : 0);
+                        }
+                        break;
+                    }
+                }
             }
         }
-    });
+
+        if (rule.isActive) {
+            var totalPrio = data.sortedTowns.reduce((a, b) => a + b.prio, 0);
+            var availableAtStart = data.availableTroops[troopIdx];
+            data.sortedTowns.forEach((town, townIdx) => {
+                var portion = (totalPrio - data.townCount) / (town.prio - 1);
+                var spend = Math.floor(availableAtStart / portion);
+                data.availableTroops[troopIdx] -= spend;
+                town.wantedTroops[troopIdx] += spend;
+            });
+
+            while (data.availableTroops[troopIdx] > 0) {
+                data.sortedTowns.forEach((town, townIdx) => {
+                    if (data.availableTroops[troopIdx] > 0) {
+                        data.availableTroops[troopIdx] -= 1;
+                        town.wantedTroops[troopIdx] += 1;
+                    }
+                })
+            }
+        }
+
+        if (rule.maximumFromSupport) {
+            var townsWithTooMuchSupport = data.sortedTowns.filter(town => 
+                town.wantedTroops[troopIdx] > town.currentTroops[troopIdx] 
+                && town.wantedTroops[troopIdx] > rule.maximumFromSupport);
+
+            townsWithTooMuchSupport.forEach(town => {
+                var howMuch = town.wantedTroops[troopIdx] - Math.max(rule.maximumFromSupport, town.currentTroops[troopIdx]);
+                for (var i=0; i<data.townCount; i++) {
+                    var targetTown = data.sortedTowns[i];
+                    if (town == targetTown || targetTown.wantedTroops[troopIdx] <= rule.maximumFromSupport) continue;
+
+                    var surplus = targetTown.currentTroops[troopIdx] - targetTown.wantedTroops[troopIdx];
+                    if (surplus > 0) {
+                        var sendBack = Math.min(surplus, howMuch);
+                        town.wantedTroops[troopIdx] -= sendBack;
+                        targetTown.wantedTroops[troopIdx] += sendBack;
+                        howMuch -= sendBack;
+
+                        if (howMuch <= 0) break;
+                    }
+                }
+                if (howMuch > 0) {
+                    town.wantedTroops[troopIdx] -= howMuch;
+                    data.availableTroops[troopIdx] += howMuch;
+                }
+            });
+        }
+    }
 }
 
 function calcSurplusTroops(data) {
@@ -242,13 +319,24 @@ function readTroops(data) {
     data.troopAmount = data.towns[Object.keys(data.towns)[0]].currentTroops.length;
 }
 
-function readMinimums(data) {
-    var val = $('#minimums').val();
-    var lines = val.split(/[\r\n\t ]+/);
+function readTroopRules(data) {
+    var val = $('#trooprules').val();
+    var lines = val.split(/[\r\n]+/);
 
-    var minimums = (data.minimums = (data.minimums || []));
-    for (var i=0; i<lines.length; i++) {
-        minimums.push(+lines[i]);
+    var troopRules = (data.troopRules = (data.troopRules || []));
+    for (var i=0; i<data.troopAmount; i++) {
+        var rule = {};
+        if (lines[i] && lines[i].trim() !== '-') {
+            rule.isActive = true;
+            var tokens = lines[i].split(/[\t ]+/);
+            tokens.forEach(token => {
+                if (/^\[\d+\]$/.exec(token)) rule.keepIfAvailable = +(token.substr(1, token.length-2));
+                else if (/^\[>\d+\]$/.exec(token)) rule.keepIfAbove = +(token.substr(2, token.length-3));
+                else if (/^\d+!$/.exec(token)) rule.maximumFromSupport = +(token.substr(0, token.length - 1));
+                else if (/^\d+$/.exec(token)) rule.minimum = +token;
+            });
+        }
+        troopRules.push(rule);
     }
 }
 
