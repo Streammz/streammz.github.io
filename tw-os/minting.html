@@ -1,0 +1,116 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TW OS calc</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .color-red {
+            color: #ff0000;
+        }
+
+        .color-gray {
+            opacity: 0.3;
+        }
+
+        pre.code { background-color: #CCCCCC; max-width: 250px; padding: 10px; }
+    </style>
+</head>
+
+<body>
+    <div class="container pt-2">
+        <div class="row">
+            <div class="col-sm">
+                <h1>Game data</h1>
+                <div class="form-group">
+                    <label for="buildings">
+                        Enter your buildings overview
+                    </label>
+                    <pre class="code">copy(JSON.stringify($('#villages tr').map((_, el) => [$(el).find('td').map((_, td) => $(td).text().trim()).toArray().slice(2, -1)]).toArray()))</pre>
+                    <textarea id="buildings" class="form-control" rows="8"></textarea>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h1>Settings</h1>
+
+                <div class="form-group">
+                    <label>Flags</label>
+                    <table class="table">
+                        <tr>
+                            <th style="color: white; background-color:darkgreen">18%</th>
+                            <th style="color: white; background-color:darkblue">20%</th>
+                            <th style="color: white; background-color:darkcyan">22%</th>
+                            <th style="color: white; background-color:purple">23%</th>
+                            <th style="color: white; background-color: #222">24%</th>
+                        </tr>
+                        <tr>
+                            <th style="background-color:darkgreen"><input type="number" id="flag-18" value="0" style="width: 40px" /></th>
+                            <th style="background-color:darkblue"><input type="number" id="flag-20" value="0" style="width: 40px" /></th>
+                            <th style="background-color:darkcyan"><input type="number" id="flag-22" value="0" style="width: 40px" /></th>
+                            <th style="background-color:purple"><input type="number" id="flag-23" value="0" style="width: 40px" /></th>
+                            <th style="background-color: #222"><input type="number" id="flag-24" value="0" style="width: 40px" /></th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="form-group">
+                    <label for="flag-boost">Flag boosts</label>
+                    <input type="number" id="flag-boost" value="0" style="width: 40px" />
+                </div>
+
+                <div class="form-group">
+                    <label for="flag-boost">Resource packs to use in 48h</label>
+                    <table class="table">
+                        <tr>
+                            <th>1%</th>
+                            <th>2%</th>
+                            <th>5%</th>
+                            <th>10%</th>
+                            <th>20%</th>
+                        </tr>
+                        <tr>
+                            <th><input type="number" id="resourcepacks-1" value="0" style="width: 40px" /></th>
+                            <th><input type="number" id="resourcepacks-2" value="0" style="width: 40px" /></th>
+                            <th><input type="number" id="resourcepacks-5" value="0" style="width: 40px" /></th>
+                            <th><input type="number" id="resourcepacks-10" value="0" style="width: 40px" /></th>
+                            <th><input type="number" id="resourcepacks-20" value="0" style="width: 40px" /></th>
+                        </tr>
+                    </table>
+                    <div><small>(This is also assuming you have a full warehouse of existing resources stored and from passive income)</small></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pt-2">
+        <div class="row">
+            <div class="col">
+                <button id="calc" class="btn btn-primary">Calc</button>
+                <div class="d-inline-block" id="status"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pt-2">
+        <div class="row">
+            <div class="col-sm">
+                <canvas id="canvas" width="1000" height="1000"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="js/minting.js"></script>
+</body>
+
+</html>
