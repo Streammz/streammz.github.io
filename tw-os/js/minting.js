@@ -1,4 +1,7 @@
 
+// TODO bonus village perks
+// TODO town bonus items? are those relevant?
+
 var fieldsToStore = [
     'buildings', 
     'flag-18', 'flag-20', 'flag-22', 'flag-23', 'flag-24', 'flag-boost',
@@ -7,6 +10,7 @@ var fieldsToStore = [
 
 $(function () {
     $('#calc').on('click', () => calc());
+    $('#copy-modal').on('shown.bs.modal', () => { $('#copy-modal textarea').select().focus(); });
     fieldsToStore.forEach(o => readLocalStorage(o));
 });
 
@@ -18,7 +22,8 @@ function calc() {
     readFlags(data);
     readResources(data);
 
-    calcCoinTowns(data);
+    calcTotalResources(data);
+    calcCoinTownsAsync(data);
 
     console.log(window.data = data);
 }
@@ -31,6 +36,7 @@ function readBuildings(data) {
     valJson.forEach(townData => {
         var town = {};
         var coords = coordRegex.exec(townData[0]);
+        town.name = townData[0].substring(0, coords.index - 1);
         town.coords = { x: +coords[1], y: +coords[2] };
         town.hasSnob = +townData[townData.length - 11] > 0;
         town.market = +townData[townData.length - 8];
@@ -61,36 +67,73 @@ function readResources(data) {
         + ($('#resourcepacks-20').val() * 0.20);
 }
 
-function calcCoinTowns(data) {
-    var best = { points: 0 };
+function calcTotalResources(data) {
+    data.totalResources = data.towns.reduce((sum, cur) => sum + (cur.storageCapacity * 3 * data.warehousesToDump), 0);
+    data.scoreCap = data.totalResources / (coinCostTotal * (data.flags.length > 0 ? 1/100*(100-data.flags[0]) : 1));
+}
+
+function calcCoinTownsAsync(data) {
+    var bestPerCluster = data.bestPerCluster = {};
     var bestIter = 0;
-    updateStatus('Calculating with 1 cluster');
+    updateStatus('Attempting 1 cluster...');
     setTimeout(() => attemptCalc(0, 1, 1));
 
     var attemptCalc = function (iter, max, clusterSize) {
         var centroids = kMeans(data, clusterSize);
         var scores = scoreCentroids(data, centroids);
-        
-        if (scores.points > best.points) {
-            best = scores;
+
+        if (!bestPerCluster[clusterSize]) bestPerCluster[clusterSize] = { points: 0 };
+        if (scores.points > bestPerCluster[clusterSize].points) {
+            bestPerCluster[clusterSize] = scores;
             bestIter = iter;
-            data.bestTowns = best.towns;
-            data.best = best;
-            renderMap(data);
+            if (!data.bestCluster || scores.points > bestPerCluster[data.bestCluster].points) {
+                data.shownCluster = data.bestCluster = clusterSize;
+            }
+
+            render(data);
         }
 
         if (++iter >= max || iter > bestIter+10) {
             clusterSize++;
             bestIter = iter = 0;
-            max = 100;
-            if (clusterSize > 20) {
-                updateStatus('Done calculating, most optimal should be ' + best.towns.length + ' clusters');
+            max = 50;
+            if (clusterSize > 20 || (clusterSize > 5 && 
+                bestPerCluster[clusterSize-1].points < bestPerCluster[clusterSize-2].points+0.003 &&
+                bestPerCluster[clusterSize-2].points < bestPerCluster[clusterSize-3].points+0.003 &&
+                bestPerCluster[clusterSize-3].points < bestPerCluster[clusterSize-4].points+0.003 &&
+                bestPerCluster[clusterSize-4].points < bestPerCluster[clusterSize-5].points+0.003)) {
+                setTimeout(() => refineCalc(iter, max, data.bestCluster));
+                updateStatus('Refining best cluster size...');
                 return;
             }
         }
 
-        updateStatus('Calculating with ' + clusterSize + ' clusters' + ('.'.repeat((iter % 3) + 1)));
+        updateStatus('Attempting ' + clusterSize + ' clusters' + ('.'.repeat((iter % 3) + 1)));
         setTimeout(() => attemptCalc(iter, max, clusterSize));
+    }
+
+    var refineCalc = function (iter, max, clusterSize) {
+        var centroids = kMeans(data, clusterSize);
+        var scores = scoreCentroids(data, centroids, 10000);
+
+        if (!bestPerCluster[clusterSize]) bestPerCluster[clusterSize] = { points: 0 };
+        if (scores.points > bestPerCluster[clusterSize].points) {
+            bestPerCluster[clusterSize] = scores;
+            bestIter = iter;
+            if (!data.bestCluster || scores.points > bestPerCluster[data.bestCluster].points) {
+                data.shownCluster = data.bestCluster = clusterSize;
+            }
+
+            render(data);
+        }
+
+        if (++iter >= max) {
+            updateStatus('Finished calculating, most optimal should be ' + data.bestCluster + ' clusters');
+            return;
+        }
+
+        updateStatus('Refining best cluster size' + ('.'.repeat((iter % 3) + 1)));
+        setTimeout(() => refineCalc(iter, max, clusterSize));
     }
 
 }
@@ -181,7 +224,7 @@ function scoreTowns(data, towns) {
 
     clusters.sort((a,b) => hubScores[towns.indexOf(a)] - hubScores[towns.indexOf(b)])
     towns.sort((a,b) => hubScores[towns.indexOf(a)] - hubScores[towns.indexOf(b)])
-    hubScores.sort((a,b) => a - b);
+    hubScores.sort((a,b) => b - a);
 
     hubScores.forEach((hubScore, idx) => {
         var flagEffect = idx < data.flags.length ? (1/100*(100-data.flags[idx])) : 1;
@@ -189,10 +232,9 @@ function scoreTowns(data, towns) {
     });
     var totalScore = hubScores.reduce((a,b) => a + b, 0);
 
-    return { towns, clusters, points: totalScore };
+    return { towns, clusters, hubScores, points: totalScore };
 }
 
-const twoDays = 48*60*60;
 function scoreTown(data, town, hub) {
     var dist = Math.sqrt((hub.coords.x - town.coords.x) ** 2 + (hub.coords.y - town.coords.y) ** 2);
     var resourcesToDump = (town.storageCapacity*3) * data.warehousesToDump;
@@ -209,8 +251,16 @@ function scoreTown(data, town, hub) {
     return { hub: resourcesAtHub, snob: resourcesAtSnob, dist: dist };
 }
 
+function render(data) {
+    renderMap(data);
+    renderClusterTable(data);
+    renderClusterDetails(data);
+
+    $('#results-container').show();
+}
+
 function renderMap(data) {
-    var canvas = $('#canvas')[0];
+    var canvas = $('#map-canvas')[0];
     const ctx = canvas.getContext('2d');
 
     var sizes = data.towns.reduce((a, b) => {
@@ -220,9 +270,11 @@ function renderMap(data) {
         if (b.coords.y > a.maxY) a.maxY = b.coords.y;
         return a;
     }, { minX: 1000, maxX: 0, minY: 1000, maxY: 0 });
-    var scale = 4;
+    const scale = 5;
     canvas.width = ((sizes.maxX - sizes.minX) + 10) * scale;
     canvas.height = ((sizes.maxY - sizes.minY) + 10) * scale;
+
+    $('#map-canvas').css('width', '100%')
 
     // Black background
     ctx.fillStyle = 'darkgreen';
@@ -230,7 +282,7 @@ function renderMap(data) {
 
     // Towns
     ctx.fillStyle = 'yellow';
-    data.best.clusters.forEach((cluster, idx) => {
+    data.bestPerCluster[data.shownCluster].clusters.forEach((cluster, idx) => {
         ctx.fillStyle = mapColors[idx];
         cluster.forEach(town => {
             ctx.fillRect((town.coords.x - sizes.minX + 5) * scale, (town.coords.y - sizes.minY + 5) * scale, scale, scale);
@@ -239,9 +291,68 @@ function renderMap(data) {
 
     // Centroids
     ctx.fillStyle = 'black';
-    data.best.towns.forEach(town => {
+    data.bestPerCluster[data.shownCluster].towns.forEach(town => {
         ctx.fillRect((town.coords.x - sizes.minX + 5) * scale, (town.coords.y - sizes.minY + 5) * scale, scale, scale);
     });
+}
+
+function renderClusterTable(data) {
+    var tbody = $('#cluster-table tbody');
+    tbody.html('');
+
+    var maxScore = data.bestPerCluster[data.bestCluster].points;
+
+    for (let clusterSize in data.bestPerCluster) {
+        var tr = $('<tr />').appendTo(tbody);
+        if (data.shownCluster == clusterSize) tr.addClass('table-primary');
+        else {
+            tr.on('click', () => {
+                data.shownCluster = clusterSize;
+                render(data);
+            })
+        }
+        $('<td />')
+            .text(clusterSize)
+            .addClass('text-right')
+            .appendTo(tr);
+
+        var percentile = 1 / maxScore * data.bestPerCluster[clusterSize].points;
+        $('<td />')
+            .text((Math.round(percentile * 10000) / 100) + '%')
+            .addClass(percentile > 0.92 ? 'text-success' : percentile > 0.85 ? 'text-warning' : 'text-danger')
+            .appendTo(tr);
+
+        tr.on('click')
+    }
+}
+
+function renderClusterDetails(data)
+{ 
+    var cluster = data.bestPerCluster[data.shownCluster];
+    
+    var tbody = $('#cluster-details tbody');
+    tbody.html('');
+
+    for (let idx=0; idx<cluster.towns.length; idx++) {
+        let town = cluster.towns[idx];
+        let clusterTowns = cluster.clusters[idx];
+
+        var tr = $('<tr />').appendTo(tbody);
+        $('<td />')
+            .html('&nbsp;')
+            .css('background-color', mapColors[idx])
+            .appendTo(tr);
+        $('<td />')
+            .append($('<span />').text(town.name + ' (' + town.coords.x + '|' + town.coords.y + ')'))
+            .appendTo(tr);
+        $('<td />')
+            .append($('<span />').text('Towns in cluster: ' + clusterTowns.length)
+                .append($('<a href="#" class="ml-2 badge badge-primary">Show coords</a>')
+                    .on('click', () => showCopyModal(clusterTowns.map(town => town.coords.x + '|' + town.coords.y).join('\r\n')))
+                )
+            )
+            .appendTo(tr);
+    }
 }
 
 function updateStatus(text) {
@@ -258,32 +369,41 @@ function readLocalStorage(name) {
         $('#' + name).val(localStorage['history-' + name]);
     }
 }
+
+function showHubCoords() {
+    showCopyModal(window.data.bestPerCluster[window.data.shownCluster].towns.map(town => town.coords.x + '|' + town.coords.y).join('\r\n'));
+}
+
+function showCopyModal(text) {
+    $('#copy-modal .modal-body textarea').val(text);
+    $('#copy-modal').modal();
+}
+
 var coordRegex = /\((\d{3})\|(\d{3})\)/;
-
-
 const marketLevels = [0,1,2,3,4,5,6,7,8,9,10,11,14,19,26,35,46,59,74,91,110,131,154,179,206,235];
 const storageLevels = [1000,1000,1229,1512,1859,2285,2810,3454,4247,5222,6420,7893,9705,11932,14670,18037,22177,27266,33523,41217,50675,62305,76604,94184,115798,142373,175047,215219,264611,325337,400000];
 const transportSpeed = 180;
 const coinCostTotal = 83000;
+const twoDays = 48*60*60;
 const mapColors = [
     "#FFD700", // Gold
-    "#FF8C00", // Dark Orange
     "#FF4500", // Orange Red
-    "#DC143C", // Crimson
     "#FF1493", // Deep Pink
-    "#FF69B4", // Hot Pink
     "#DB7093", // Pale Violet Red
-    "#BA55D3", // Medium Orchid
     "#9370DB", // Medium Purple
-    "#7B68EE", // Medium Slate Blue
     "#4169E1", // Royal Blue
-    "#1E90FF", // Dodger Blue
     "#00BFFF", // Deep Sky Blue
-    "#40E0D0", // Turquoise
     "#48D1CC", // Medium Turquoise
-    "#00FA9A", // Medium Spring Green
     "#ADFF2F", // Green Yellow
-    "#FFFF54", // Soft Yellow
     "#F0E68C", // Khaki
-    "#FFE4B5"  // Moccasin
+    "#FF8C00", // Dark Orange
+    "#DC143C", // Crimson
+    "#FF69B4", // Hot Pink
+    "#BA55D3", // Medium Orchid
+    "#7B68EE", // Medium Slate Blue
+    "#1E90FF", // Dodger Blue
+    "#40E0D0", // Turquoise
+    "#00FA9A", // Medium Spring Green
+    "#FFFF54", // Soft Yellow
+    "#FFE4B5",  // Moccasin
   ];
