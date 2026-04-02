@@ -1,6 +1,8 @@
 
 // TODO bonus village perks
 // TODO town bonus items? are those relevant?
+// TODO don't scroll up when opening copy modal
+// TODO add copy button to copy modal
 
 var fieldsToStore = [
     'buildings', 
@@ -222,11 +224,14 @@ function scoreTowns(data, towns) {
         snobScore += bestScore.snob;
     }
 
-    clusters.sort((a,b) => hubScores[towns.indexOf(a)] - hubScores[towns.indexOf(b)])
-    towns.sort((a,b) => hubScores[towns.indexOf(a)] - hubScores[towns.indexOf(b)])
-    hubScores.sort((a,b) => b - a);
+    var sorterArray = [...Array(hubScores.length).keys()];
+    sorterArray.sort((a,b) => hubScores[b] - hubScores[a]);
 
-    hubScores.forEach((hubScore, idx) => {
+    clusters.sort((a,b) => sorterArray.indexOf(clusters.indexOf(a)) - sorterArray.indexOf(clusters.indexOf(b)));
+    towns.sort((a,b) => sorterArray.indexOf(towns.indexOf(a)) - sorterArray.indexOf(towns.indexOf(b)));
+    hubScores.sort((a,b) => sorterArray.indexOf(hubScores.indexOf(a)) - sorterArray.indexOf(hubScores.indexOf(b)));
+
+    hubScores.forEach((_, idx) => {
         var flagEffect = idx < data.flags.length ? (1/100*(100-data.flags[idx])) : 1;
         hubScores[idx] /= (coinCostTotal * flagEffect);
     });
