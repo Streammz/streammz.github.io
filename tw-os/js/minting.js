@@ -3,6 +3,11 @@
 // TODO town bonus items? are those relevant?
 // TODO don't scroll up when opening copy modal
 // TODO add copy button to copy modal
+// TODO add copy button to script
+// TODO edeldecreet
+// TODO resource ratio
+// TODO show flags on clusters
+// TODO show coin estimate
 
 var fieldsToStore = [
     'buildings', 
@@ -324,6 +329,11 @@ function renderClusterTable(data) {
         var percentile = 1 / maxScore * data.bestPerCluster[clusterSize].points;
         $('<td />')
             .text((Math.round(percentile * 10000) / 100) + '%')
+            .addClass(percentile > 0.92 ? 'text-success' : percentile > 0.85 ? 'text-warning' : 'text-danger')
+            .appendTo(tr);
+
+        $('<td />')
+            .text(Math.floor(data.bestPerCluster[clusterSize].points))
             .addClass(percentile > 0.92 ? 'text-success' : percentile > 0.85 ? 'text-warning' : 'text-danger')
             .appendTo(tr);
 
