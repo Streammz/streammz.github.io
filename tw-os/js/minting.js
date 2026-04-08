@@ -3,10 +3,13 @@
 // TODO town bonus items? are those relevant?
 // TODO don't scroll up when opening copy modal
 // TODO add copy button to copy modal
-// TODO add copy button to script
+// TODO add copy button to game data script
 // TODO edeldecreet
 // TODO resource ratio
-// TODO show flags on clusters
+// TODO show used flags in cluster info table
+// TODO calculate optimal spots for unused flags
+// TODO coinpull interval
+// TODO localStorage for last calculated data
 
 var fieldsToStore = [
     'buildings', 
