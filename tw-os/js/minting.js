@@ -101,6 +101,7 @@ function calcCoinTownsAsync(data) {
     var bestIter = 0;
     updateStatus('attempting1st');
     setTimeout(() => attemptCalc(0, 1, 1));
+    $('#calc').prop('disabled', true);
 
     var attemptCalc = function (iter, max, clusterSize) {
         var centroids = kMeans(data, clusterSize);
@@ -153,6 +154,7 @@ function calcCoinTownsAsync(data) {
 
         if (++iter >= max) {
             updateStatus('finished', data.bestCluster);
+            $('#calc').prop('disabled', false);
             return;
         }
 
@@ -386,14 +388,17 @@ function renderClusterDetails(data)
             .append($('<span />').text(town.name + ' (' + town.coords.x + '|' + town.coords.y + ')'))
             .appendTo(tr);
         $('<td />')
-            .append($('<span />').text('Towns in cluster: ' + clusterTowns.length)
-                .append($('<a href="#" class="ml-2 badge badge-primary">Show coords</a>')
+            .append($('<div />').text(tbody.attr('data-tl-townsInCluster') + ': ' + clusterTowns.length)
+                .append($('<a href="#" class="ml-2 badge badge-primary"></a>')
+                    .text($('#cluster-details thead .badge').text())
                     .on('click', () => {
                         showCopyModal(clusterTowns.map(town => town.coords.x + '|' + town.coords.y).join('\r\n'));
                         return false;
                     })
                 )
             )
+            .append($('<div />').text(tbody.attr('data-tl-townsWithoutMaxStorage') + ': ' + clusterTowns.filter(o => o.storage < 30).length))
+            .append($('<div />').text(tbody.attr('data-tl-townsWithoutMaxMarket') + ': ' + clusterTowns.filter(o => o.market < 25).length))
             .appendTo(tr);
     }
 }

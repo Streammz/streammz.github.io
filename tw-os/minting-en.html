@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mepdorpen cluster berekentool</title>
+    <title>Minting village clusters calculator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>        
@@ -27,19 +27,19 @@
     <div class="container pt-2">
         <div class="row">
             <div class="col mb-4">
-                <h1>Mepdorpen cluster berekentool 
+                <h1>Minting village clusters calculator 
                     <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#info-collapse">ℹ</button>
                 </h1>
                 <div class="collapse" id="info-collapse">
                     <div class="card card-body">
-                        <p class="mb-0">Deze tool helpt jou met het uitrekenen van optimale mepdorpen gebaseerd op vlaggen, items, gebouwlevels, etc.</p>
-                        <p class="mb-0">Voorbeelden van dingen waar de tool rekening mee houdt:</p>
+                        <p class="mb-0">This tool helps you calculate your optimal minting villages based on flags, items, building levels, et cetera.</p>
+                        <p class="mb-0">Some things this tool takes into consideration:</p>
                         <ul>
-                            <li>Opslagplaats, markt en adelshoeve gebouwlevels</li>
-                            <li>Muntkosten vlaggen en vlagboosters</li>
-                            <li>Grondstoffenpakketten die je wilt gebruiken in een 48 uur periode</li>
-                            <li>Dorpen die de grondstoffen niet snel genoeg kunnen sturen naar het bijhorende mepdorp zal zelf munten meppen om de opslag niet te laten overlopen</li>
-                            <li>Als dorpen bij meerdere mepdorpen snel genoeg geleegd kunnen worden, zal dat gedaan worden waar het het goedkoopst is</li>
+                            <li>Storage and market building levels</li>
+                            <li>Coin cost reduction flags and flag boosters</li>
+                            <li>Resource items that you want to use in a 48 hour period</li>
+                            <li>Towns that can't send to a hub town fast enough will mint in it's own town if possible to prevent overflowing storage.</li>
+                            <li>If towns can be emptied in time at multiple hubs, it will use the hub where coins are cheapest</li>
                         </ul>
                     </div>
                 </div>
@@ -47,21 +47,21 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                <h2>Data uit het spel</h2>
+                <h2>Game data</h2>
                 <div class="form-group">
                     <label for="buildings">
-                        Voer data van je Overzicht>Gebouwen in
+                        Enter your buildings overview
                     </label>
                     <pre class="code" id="game-data-code">copy(JSON.stringify($('#villages tr').map((_, el) => [$(el).find('td').map((_, td) => $(td).text().trim()).toArray().slice(2, -1)]).toArray()))</pre>
-                    <button type="button" id="game-data-code-copy" class="btn btn-secondary" data-tl-copied="Gekopiëerd!" data-tl-copy="Kopiëer" onclick="copyGameDataScript()" style="display: inline-block; position: absolute; right: 15px; top: 78px;">Kopiëer</button>
+                    <button type="button" id="game-data-code-copy" class="btn btn-secondary" data-tl-copied="Copied!" data-tl-copy="Copy" onclick="copyGameDataScript()" style="display: inline-block; position: absolute; right: 15px; top: 78px;">Copy</button>
                     <textarea id="buildings" class="form-control" rows="8"></textarea>
                 </div>
             </div>
             <div class="col-sm">
-                <h2>Losse instellingen</h2>
+                <h2>Settings</h2>
                 
                 <div class="form-group">
-                    <label>Muntkosten vlaggen</label>
+                    <label>Coin reduction flags</label>
                     <table class="table">
                         <tr>
                             <th style="color: white; background-color:grey">10%</th>
@@ -91,20 +91,20 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="flag-boost">Vlaggenboosters</label>
+                            <label for="flag-boost">Flag boosts</label>
                             <input type="number" id="flag-boost" value="0" style="width: 50px" />
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="flag-boost">Edeldecreten</label>
+                            <label for="flag-boost">Noble decrees</label>
                             <input type="number" id="noble-decree" value="0" style="width: 50px" />
                         </div>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="flag-boost">Grondstoffenpakketjes die je binnen 48 uur wilt gebruiken</label>
+                    <label for="flag-boost">Resource packs to use in 48h</label>
                     <table class="table">
                         <tr>
                             <th>1%</th>
@@ -125,7 +125,7 @@
                             <th><input type="number" id="resourcepacks-30" value="0" style="width: 50px" /></th>
                         </tr>
                     </table>
-                    <div><small>(We gaan er van uit dat je ongeveer een volle opslag gebruikt aan bestaande + verzamelde grondstoffen)</small></div>
+                    <div><small>(This is also assuming you have a full warehouse of existing resources stored and from passive income)</small></div>
                 </div>
             </div>
         </div>
@@ -136,10 +136,10 @@
             <div class="col">
                 <button id="calc" class="btn btn-primary">Calc</button>
                 <div class="d-inline-block" id="status"
-                    data-tl-attempting1st="1 cluster aan het proberen..."
-                    data-tl-refining="Beste clustergrootte proberen te verbeteren{0}"
-                    data-tl-attemptingXClusters="{0} clusters aan het proberen{1}"
-                    data-tl-finished="Klaar met berekenen, {0} clusters zou het best moeten zijn"></div>
+                    data-tl-attempting1st="Attempting 1 cluster..."
+                    data-tl-refining="Refining best cluster size{0}"
+                    data-tl-attemptingXClusters="attempting {0} clusters{1}"
+                    data-tl-finished="Finished calculating, most optimal should be {0} clusters"></div>
             </div>
         </div>
     </div>
@@ -151,26 +151,26 @@
             </div>
             <div class="col-sm">
                 <table class="table table-hover" id="cluster-table">
-                    <thead><tr><th style="width: 120px">Clustergrootte</th><th>Score percentage</th><th>Munten schatting</th></tr></thead>
+                    <thead><tr><th style="width: 120px">Cluster size</th><th>Score percentile</th><th>Coin est.</th></tr></thead>
                     <tbody></tbody>
                 </table>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-sm">
-                <h2>Cluster informatie</h2>
+                <h2>Cluster information</h2>
                 <table class="table" id="cluster-details">
                     <thead>
                         <tr>
                             <th style="width: 40px">&nbsp;</th>
-                            <th>Mepdorpen <a href="javascript:showHubCoords()" class="badge badge-primary">Coords tonen</a></th>
-                            <th>Extra info</th>
+                            <th>Hub towns <a href="javascript:showHubCoords()" class="badge badge-primary">Show coords</a></th>
+                            <th>Info</th>
                         </tr>
                     </thead>
                     <tbody
-                        data-tl-townsInCluster="Dorpen in het cluster"
-                        data-tl-townsWithoutMaxStorage="- zonder max opslag"
-                        data-tl-townsWithoutMaxMarket="- zonder max markt"></tbody>
+                        data-tl-townsInCluster="Towns in cluster"
+                        data-tl-townsWithoutMaxStorage="- without max storage"
+                        data-tl-townsWithoutMaxMarket="- without max market"></tbody>
                 </table>
             </div>
         </div>
@@ -183,8 +183,8 @@
                     <textarea class="form-control" rows="20"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-tl-copied="Gekopiëerd!" data-tl-copy="Kopiëer" onclick="copyFromCopyModal()">Kopiëer</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                    <button type="button" class="btn btn-primary" data-tl-copied="Copied!" data-tl-copy="Copy" onclick="copyFromCopyModal()">Copy</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
