@@ -213,7 +213,7 @@ function scoreCentroids(data, centroids, maxIter = 3000) {
             .sort((a, b) => a.dist - b.dist)
             .map(t => t.t)
             .filter(t => t.hasSnob == true)
-            .slice(0, 10);
+            .slice(0, maxIter <= 3000 ? 10 : 20);
     });
 
     var iter = 0, bestScore;
