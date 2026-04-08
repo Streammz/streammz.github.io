@@ -6,17 +6,20 @@
     <title>TW OS calc</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        .color-red {
-            color: #ff0000;
-        }
-        
-        .color-gray {
-            opacity: 0.3;
-        }
-        
+    <style>        
         pre.code { background-color: #CCCCCC; max-width: 250px; padding: 10px; }
         .table-hover tr:hover { cursor: pointer; }
+        .icon-flag { display: inline-block; width: 14px; height: 14px; transform: scale(1.4285); margin-right: 8px; }
+        .icon-flag.flag-boosted::before { content: '+'; display: block; position: absolute; right: -2px; bottom: -5px; color: green; font-weight: 900; font-size: 16px; -webkit-text-stroke: 0.3px white; }
+        .icon-flag.flag-10 { background-image: url('https://dsnl.innogamescdn.com/asset/8e371e58/graphic/flags/small/1.webp') }
+        .icon-flag.flag-12 { background-image: url('https://dsnl.innogamescdn.com/asset/8e371e58/graphic/flags/small/2.webp') }
+        .icon-flag.flag-14 { background-image: url('https://dsnl.innogamescdn.com/asset/8e371e58/graphic/flags/small/3.webp') }
+        .icon-flag.flag-16 { background-image: url('https://dsnl.innogamescdn.com/asset/8e371e58/graphic/flags/small/4.webp') }
+        .icon-flag.flag-18 { background-image: url('https://dsnl.innogamescdn.com/asset/8e371e58/graphic/flags/small/5.webp') }
+        .icon-flag.flag-20 { background-image: url('https://dsnl.innogamescdn.com/asset/8e371e58/graphic/flags/small/6.webp') }
+        .icon-flag.flag-22 { background-image: url('https://dsnl.innogamescdn.com/asset/8e371e58/graphic/flags/small/7.webp') }
+        .icon-flag.flag-23 { background-image: url('https://dsnl.innogamescdn.com/asset/8e371e58/graphic/flags/small/8.webp') }
+        .icon-flag.flag-24 { background-image: url('https://dsnl.innogamescdn.com/asset/8e371e58/graphic/flags/small/9.webp') }
     </style>
 </head>
 
@@ -50,7 +53,8 @@
                     <label for="buildings">
                         Enter your buildings overview
                     </label>
-                    <pre class="code">copy(JSON.stringify($('#villages tr').map((_, el) => [$(el).find('td').map((_, td) => $(td).text().trim()).toArray().slice(2, -1)]).toArray()))</pre>
+                    <pre class="code" id="game-data-code">copy(JSON.stringify($('#villages tr').map((_, el) => [$(el).find('td').map((_, td) => $(td).text().trim()).toArray().slice(2, -1)]).toArray()))</pre>
+                    <button type="button" id="game-data-code-copy" class="btn btn-secondary" data-tl-copied="Copied!" data-tl-copy="Copy" onclick="copyGameDataScript()" style="display: inline-block; position: absolute; right: 15px; top: 78px;">Copy</button>
                     <textarea id="buildings" class="form-control" rows="8"></textarea>
                 </div>
             </div>

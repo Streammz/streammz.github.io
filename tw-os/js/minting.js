@@ -5,20 +5,16 @@
   - Town bonus items (25% storage+market)
   - Take resource ratio into consideration (much leem)
   - Adjust/consider coinpull interval (markets don't have 100% uptime in practice)
+  - Calculate optimal spots for unused flags (towns with snobs that are consistently overflowing)
 
   UX:
-  - Add copy button to game data script
   - Save last calculated data in localstorage
   - Move sections to panels/stepper
-
-  Clarity:
-  - Show used flags in cluster info table
-  - Calculate optimal spots for unused flags (towns with snobs that are consistently overflowing)
 */
 
 var fieldsToStore = [
     'buildings', 
-    'flag-11', 'flag-12', 'flag-14', 'flag-16', 'flag-18', 'flag-20', 'flag-22', 'flag-23', 'flag-24', 
+    'flag-10', 'flag-12', 'flag-14', 'flag-16', 'flag-18', 'flag-20', 'flag-22', 'flag-23', 'flag-24', 
     'flag-boost', 'noble-decree',
     'resourcepacks-1', 'resourcepacks-2', 'resourcepacks-5', 'resourcepacks-10', 'resourcepacks-15', 'resourcepacks-20', 'resourcepacks-30'
 ];
@@ -66,12 +62,19 @@ function readBuildings(data) {
 
 function readFlags(data) {
     data.flags = [];
-    for (var i=$('#flag-24').val(); i>0; i--) data.flags.push(24);
-    for (var i=$('#flag-23').val(); i>0; i--) data.flags.push(23);
-    for (var i=$('#flag-22').val(); i>0; i--) data.flags.push(22);
-    for (var i=$('#flag-20').val(); i>0; i--) data.flags.push(20);
-    for (var i=$('#flag-18').val(); i>0; i--) data.flags.push(18);
-    for (var i=0; i<$('#flag-boost').val() && i<data.flags.length; i++) data.flags[i] *= 2;
+    for (var i=$('#flag-24').val(); i>0; i--) data.flags.push({ tier: 24, effect: 24 });
+    for (var i=$('#flag-23').val(); i>0; i--) data.flags.push({ tier: 23, effect: 23 });
+    for (var i=$('#flag-22').val(); i>0; i--) data.flags.push({ tier: 22, effect: 22 });
+    for (var i=$('#flag-20').val(); i>0; i--) data.flags.push({ tier: 20, effect: 20 });
+    for (var i=$('#flag-18').val(); i>0; i--) data.flags.push({ tier: 18, effect: 18 });
+    for (var i=$('#flag-16').val(); i>0; i--) data.flags.push({ tier: 16, effect: 16 });
+    for (var i=$('#flag-14').val(); i>0; i--) data.flags.push({ tier: 14, effect: 14 });
+    for (var i=$('#flag-12').val(); i>0; i--) data.flags.push({ tier: 12, effect: 12 });
+    for (var i=$('#flag-10').val(); i>0; i--) data.flags.push({ tier: 10, effect: 10 });
+    for (var i=0; i<$('#flag-boost').val() && i<data.flags.length; i++) {
+        data.flags[i].effect *= 2;
+        data.flags[i].isBoosted = true;
+    }
 }
 
 function readBoostItems(data) {
@@ -91,7 +94,6 @@ function readResources(data) {
 
 function calcTotalResources(data) {
     data.totalResources = data.towns.reduce((sum, cur) => sum + (cur.storageCapacity * 3 * data.warehousesToDump), 0);
-    data.scoreCap = data.totalResources / (coinCostTotal * (data.flags.length > 0 ? 1/100*(100-data.flags[0]) : 1));
 }
 
 function calcCoinTownsAsync(data) {
@@ -252,7 +254,7 @@ function scoreTowns(data, towns) {
     hubScores.sort((a,b) => sorterArray.indexOf(hubScores.indexOf(a)) - sorterArray.indexOf(hubScores.indexOf(b)));
 
     hubScores.forEach((_, idx) => {
-        var flagEffect = idx < data.flags.length ? (1/100*(100-data.flags[idx])) : 1;
+        var flagEffect = idx < data.flags.length ? (1/100*(100-data.flags[idx].effect)) : 1;
         var decreeEffect = data.nobleDecrees >= 2 ? 0.9 : data.nobleDecrees == 1 ? 0.95 : 1;
         hubScores[idx] /= (coinCostTotal * flagEffect * decreeEffect);
     });
@@ -302,7 +304,7 @@ function renderMap(data) {
 
     $('#map-canvas').css('width', '100%')
 
-    // Black background
+    // Green background
     ctx.fillStyle = 'darkgreen';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -315,7 +317,7 @@ function renderMap(data) {
         });
     })
 
-    // Centroids
+    // Hubs
     ctx.fillStyle = 'black';
     data.bestPerCluster[data.shownCluster].towns.forEach(town => {
         ctx.fillRect((town.coords.x - sizes.minX + 5) * scale, (town.coords.y - sizes.minY + 5) * scale, scale, scale);
@@ -343,17 +345,22 @@ function renderClusterTable(data) {
             .appendTo(tr);
 
         var percentile = 1 / maxScore * data.bestPerCluster[clusterSize].points;
+        var colorClass = percentile >= 0.94 ? 'text-success' : percentile >= 0.88 ? 'text-warning' : 'text-danger';
+        var pointsText = Math.floor(data.bestPerCluster[clusterSize].points);
+        if (pointsText >= 10000) { 
+            pointsText = ''+Math.round(pointsText/100);
+            pointsText = pointsText.substring(0, pointsText.length - 1) + '.' + pointsText.substring(pointsText.length - 1, pointsText.length) + 'k';
+        }
+
         $('<td />')
             .text((Math.round(percentile * 10000) / 100) + '%')
-            .addClass(percentile > 0.92 ? 'text-success' : percentile > 0.85 ? 'text-warning' : 'text-danger')
+            .addClass(colorClass)
             .appendTo(tr);
 
         $('<td />')
-            .text(Math.floor(data.bestPerCluster[clusterSize].points))
-            .addClass(percentile > 0.92 ? 'text-success' : percentile > 0.85 ? 'text-warning' : 'text-danger')
+            .text(pointsText)
+            .addClass(colorClass)
             .appendTo(tr);
-
-        tr.on('click')
     }
 }
 
@@ -367,6 +374,7 @@ function renderClusterDetails(data)
     for (let idx=0; idx<cluster.towns.length; idx++) {
         let town = cluster.towns[idx];
         let clusterTowns = cluster.clusters[idx];
+        let flag = data.flags[idx];
 
         var tr = $('<tr />').appendTo(tbody);
         $('<td />')
@@ -374,6 +382,7 @@ function renderClusterDetails(data)
             .css('background-color', mapColors[idx])
             .appendTo(tr);
         $('<td />')
+            .append(flag ? $('<span class="icon-flag" />').addClass('flag-' + flag.tier).addClass(flag.effect > flag.tier ? 'flag-boosted' : '') : null)
             .append($('<span />').text(town.name + ' (' + town.coords.x + '|' + town.coords.y + ')'))
             .appendTo(tr);
         $('<td />')
@@ -424,6 +433,22 @@ function copyFromCopyModal() {
     document.execCommand('copy');
 
     var btn = $('#copy-modal .btn-primary');
+    btn.text(btn.attr('data-tl-copied'));
+    setTimeout(() => btn.text(btn.attr('data-tl-copy')), 5000);
+}
+
+function copyGameDataScript() {
+    const element = document.getElementById('game-data-code');
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    document.execCommand('copy');
+
+    var btn = $('#game-data-code-copy');
     btn.text(btn.attr('data-tl-copied'));
     setTimeout(() => btn.text(btn.attr('data-tl-copy')), 5000);
 }
