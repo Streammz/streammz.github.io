@@ -7,7 +7,6 @@
 // TODO edeldecreet
 // TODO resource ratio
 // TODO show flags on clusters
-// TODO show coin estimate
 
 var fieldsToStore = [
     'buildings', 
@@ -193,7 +192,7 @@ function scoreCentroids(data, centroids, maxIter = 3000) {
             .map(t => ({ t, dist: (t.coords.x - c.x) ** 2 + (t.coords.y - c.y) ** 2 }))
             .sort((a, b) => a.dist - b.dist)
             .map(t => t.t)
-            .filter(t => t.hasSnob = true)
+            .filter(t => t.hasSnob == true)
             .slice(0, 10);
     });
 
