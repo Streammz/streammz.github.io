@@ -1,15 +1,25 @@
 
-// TODO bonus village perks
-// TODO town bonus items? are those relevant?
-// TODO don't scroll up when opening copy modal
-// TODO add copy button to copy modal
-// TODO add copy button to game data script
-// TODO edeldecreet
-// TODO resource ratio
-// TODO show used flags in cluster info table
-// TODO calculate optimal spots for unused flags
-// TODO coinpull interval
-// TODO localStorage for last calculated data
+/* TODO list
+  Adjust coin calculation:
+  - Bonus village perks (50% storage+market)
+  - Town bonus items (25% storage+market)
+  - Edeldecreet (10% less coin cost)
+  - Take resource ratio into consideration (much leem)
+  - Adjust/consider coinpull interval (markets don't have 100% uptime in practice)
+
+  UX:
+  - Don't scroll up when opening copy modal
+  - Add copy button to copy modal
+  - Add copy button to game data script
+  - Save last calculated data in localstorage
+  - Make number input wide enough for 3 numbers
+  - Move sections to panels/stepper
+
+  Clarity:
+  - Show used flags in cluster info table
+  - Calculate optimal spots for unused flags (towns with snobs that are consistently overflowing)
+  - Include 15%/30% resource packs
+*/
 
 var fieldsToStore = [
     'buildings', 
