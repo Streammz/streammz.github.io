@@ -61,6 +61,10 @@
                     <label>Flags</label>
                     <table class="table">
                         <tr>
+                            <th style="color: white; background-color:grey">10%</th>
+                            <th style="color: white; background-color:saddlebrown">12%</th>
+                            <th style="color: white; background-color:darkred">14%</th>
+                            <th style="color: white; background-color:goldenrod">16%</th>
                             <th style="color: white; background-color:darkgreen">18%</th>
                             <th style="color: white; background-color:darkblue">20%</th>
                             <th style="color: white; background-color:darkcyan">22%</th>
@@ -68,18 +72,32 @@
                             <th style="color: white; background-color: #222">24%</th>
                         </tr>
                         <tr>
-                            <th style="background-color:darkgreen"><input type="number" id="flag-18" value="0" style="width: 40px" /></th>
-                            <th style="background-color:darkblue"><input type="number" id="flag-20" value="0" style="width: 40px" /></th>
-                            <th style="background-color:darkcyan"><input type="number" id="flag-22" value="0" style="width: 40px" /></th>
-                            <th style="background-color:purple"><input type="number" id="flag-23" value="0" style="width: 40px" /></th>
-                            <th style="background-color: #222"><input type="number" id="flag-24" value="0" style="width: 40px" /></th>
+                            <th style="background-color:grey"><input type="number" id="flag-10" value="0" style="width: 38px" /></th>
+                            <th style="background-color:saddlebrown"><input type="number" id="flag-12" value="0" style="width: 38px" /></th>
+                            <th style="background-color:darkred"><input type="number" id="flag-14" value="0" style="width: 38px" /></th>
+                            <th style="background-color:goldenrod"><input type="number" id="flag-16" value="0" style="width: 38px" /></th>
+                            <th style="background-color:darkgreen"><input type="number" id="flag-18" value="0" style="width: 38px" /></th>
+                            <th style="background-color:darkblue"><input type="number" id="flag-20" value="0" style="width: 38px" /></th>
+                            <th style="background-color:darkcyan"><input type="number" id="flag-22" value="0" style="width: 38px" /></th>
+                            <th style="background-color:purple"><input type="number" id="flag-23" value="0" style="width: 38px" /></th>
+                            <th style="background-color: #222"><input type="number" id="flag-24" value="0" style="width: 38px" /></th>
                         </tr>
                     </table>
                 </div>
                 
-                <div class="form-group">
-                    <label for="flag-boost">Flag boosts</label>
-                    <input type="number" id="flag-boost" value="0" style="width: 40px" />
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="flag-boost">Flag boosts</label>
+                            <input type="number" id="flag-boost" value="0" style="width: 50px" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="flag-boost">Noble decrees</label>
+                            <input type="number" id="noble-decree" value="0" style="width: 50px" />
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -90,14 +108,18 @@
                             <th>2%</th>
                             <th>5%</th>
                             <th>10%</th>
+                            <th>15%</th>
                             <th>20%</th>
+                            <th>30%</th>
                         </tr>
                         <tr>
-                            <th><input type="number" id="resourcepacks-1" value="0" style="width: 40px" /></th>
-                            <th><input type="number" id="resourcepacks-2" value="0" style="width: 40px" /></th>
-                            <th><input type="number" id="resourcepacks-5" value="0" style="width: 40px" /></th>
-                            <th><input type="number" id="resourcepacks-10" value="0" style="width: 40px" /></th>
-                            <th><input type="number" id="resourcepacks-20" value="0" style="width: 40px" /></th>
+                            <th><input type="number" id="resourcepacks-1" value="0" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-2" value="0" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-5" value="0" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-10" value="0" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-15" value="0" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-20" value="0" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-30" value="0" style="width: 50px" /></th>
                         </tr>
                     </table>
                     <div><small>(This is also assuming you have a full warehouse of existing resources stored and from passive income)</small></div>
@@ -110,7 +132,11 @@
         <div class="row">
             <div class="col">
                 <button id="calc" class="btn btn-primary">Calc</button>
-                <div class="d-inline-block" id="status"></div>
+                <div class="d-inline-block" id="status"
+                    data-tl-attempting1st="Attempting 1 cluster..."
+                    data-tl-refining="Refining best cluster size{0}"
+                    data-tl-attemptingXClusters="attempting {0} clusters{1}"
+                    data-tl-finished="Finished calculating, most optimal should be {0} clusters"></div>
             </div>
         </div>
     </div>
@@ -151,6 +177,7 @@
                     <textarea class="form-control" rows="20"></textarea>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-tl-copied="Copied!" data-tl-copy="Copy" onclick="copyFromCopyModal()">Copy</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>

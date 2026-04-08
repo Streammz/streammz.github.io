@@ -3,13 +3,10 @@
   Adjust coin calculation:
   - Bonus village perks (50% storage+market)
   - Town bonus items (25% storage+market)
-  - Edeldecreet (10% less coin cost)
   - Take resource ratio into consideration (much leem)
   - Adjust/consider coinpull interval (markets don't have 100% uptime in practice)
 
   UX:
-  - Don't scroll up when opening copy modal
-  - Add copy button to copy modal
   - Add copy button to game data script
   - Save last calculated data in localstorage
   - Make number input wide enough for 3 numbers
@@ -18,13 +15,13 @@
   Clarity:
   - Show used flags in cluster info table
   - Calculate optimal spots for unused flags (towns with snobs that are consistently overflowing)
-  - Include 15%/30% resource packs
 */
 
 var fieldsToStore = [
     'buildings', 
-    'flag-18', 'flag-20', 'flag-22', 'flag-23', 'flag-24', 'flag-boost',
-    'resourcepacks-1', 'resourcepacks-2', 'resourcepacks-5', 'resourcepacks-10', 'resourcepacks-20'
+    'flag-11', 'flag-12', 'flag-14', 'flag-16', 'flag-18', 'flag-20', 'flag-22', 'flag-23', 'flag-24', 
+    'flag-boost', 'noble-decree',
+    'resourcepacks-1', 'resourcepacks-2', 'resourcepacks-5', 'resourcepacks-10', 'resourcepacks-15', 'resourcepacks-20', 'resourcepacks-30'
 ];
 
 $(function () {
@@ -39,6 +36,7 @@ function calc() {
     var data = {};
     readBuildings(data);
     readFlags(data);
+    readBoostItems(data);
     readResources(data);
 
     calcTotalResources(data);
@@ -77,13 +75,19 @@ function readFlags(data) {
     for (var i=0; i<$('#flag-boost').val() && i<data.flags.length; i++) data.flags[i] *= 2;
 }
 
+function readBoostItems(data) {
+    data.nobleDecrees = $('#noble-decree').val();
+}
+
 function readResources(data) {
     data.warehousesToDump = 1 
         + ($('#resourcepacks-1').val() * 0.01)
         + ($('#resourcepacks-2').val() * 0.02)
         + ($('#resourcepacks-5').val() * 0.05)
         + ($('#resourcepacks-10').val() * 0.10)
-        + ($('#resourcepacks-20').val() * 0.20);
+        + ($('#resourcepacks-15').val() * 0.15)
+        + ($('#resourcepacks-20').val() * 0.20)
+        + ($('#resourcepacks-30').val() * 0.30);
 }
 
 function calcTotalResources(data) {
@@ -94,7 +98,7 @@ function calcTotalResources(data) {
 function calcCoinTownsAsync(data) {
     var bestPerCluster = data.bestPerCluster = {};
     var bestIter = 0;
-    updateStatus('Attempting 1 cluster...');
+    updateStatus('attempting1st');
     setTimeout(() => attemptCalc(0, 1, 1));
 
     var attemptCalc = function (iter, max, clusterSize) {
@@ -122,12 +126,12 @@ function calcCoinTownsAsync(data) {
                 bestPerCluster[clusterSize-3].points < bestPerCluster[clusterSize-4].points+0.003 &&
                 bestPerCluster[clusterSize-4].points < bestPerCluster[clusterSize-5].points+0.003)) {
                 setTimeout(() => refineCalc(iter, max, data.bestCluster));
-                updateStatus('Refining best cluster size...');
+                updateStatus('refining', '...');
                 return;
             }
         }
 
-        updateStatus('Attempting ' + clusterSize + ' clusters' + ('.'.repeat((iter % 3) + 1)));
+        updateStatus('attemptingXClusters', clusterSize, ('.'.repeat((iter % 3) + 1)));
         setTimeout(() => attemptCalc(iter, max, clusterSize));
     }
 
@@ -147,11 +151,11 @@ function calcCoinTownsAsync(data) {
         }
 
         if (++iter >= max) {
-            updateStatus('Finished calculating, most optimal should be ' + data.bestCluster + ' clusters');
+            updateStatus('finished', data.bestCluster);
             return;
         }
 
-        updateStatus('Refining best cluster size' + ('.'.repeat((iter % 3) + 1)));
+        updateStatus('refining', ('.'.repeat((iter % 3) + 1)));
         setTimeout(() => refineCalc(iter, max, clusterSize));
     }
 
@@ -250,7 +254,8 @@ function scoreTowns(data, towns) {
 
     hubScores.forEach((_, idx) => {
         var flagEffect = idx < data.flags.length ? (1/100*(100-data.flags[idx])) : 1;
-        hubScores[idx] /= (coinCostTotal * flagEffect);
+        var decreeEffect = data.nobleDecrees >= 2 ? 0.9 : data.nobleDecrees == 1 ? 0.95 : 1;
+        hubScores[idx] /= (coinCostTotal * flagEffect * decreeEffect);
     });
     var totalScore = hubScores.reduce((a,b) => a + b, 0);
 
@@ -375,14 +380,23 @@ function renderClusterDetails(data)
         $('<td />')
             .append($('<span />').text('Towns in cluster: ' + clusterTowns.length)
                 .append($('<a href="#" class="ml-2 badge badge-primary">Show coords</a>')
-                    .on('click', () => showCopyModal(clusterTowns.map(town => town.coords.x + '|' + town.coords.y).join('\r\n')))
+                    .on('click', () => {
+                        showCopyModal(clusterTowns.map(town => town.coords.x + '|' + town.coords.y).join('\r\n'));
+                        return false;
+                    })
                 )
             )
             .appendTo(tr);
     }
 }
 
-function updateStatus(text) {
+function updateStatus(textName, args) {
+    var text = $('#status').attr('data-tl-' + textName);
+
+    for (var i=1; i<arguments.length; i++) {
+        text = text.replace(new RegExp('\\{' + (i-1) + '\\}', 'gm'), arguments[i]);
+    }
+
     $('#status').text(text);
 }
 
@@ -404,6 +418,15 @@ function showHubCoords() {
 function showCopyModal(text) {
     $('#copy-modal .modal-body textarea').val(text);
     $('#copy-modal').modal();
+}
+
+function copyFromCopyModal() {
+    $('#copy-modal textarea').select(); 
+    document.execCommand('copy');
+
+    var btn = $('#copy-modal .btn-primary');
+    btn.text(btn.attr('data-tl-copied'));
+    setTimeout(() => btn.text(btn.attr('data-tl-copy')), 5000);
 }
 
 var coordRegex = /\((\d{3})\|(\d{3})\)/;
