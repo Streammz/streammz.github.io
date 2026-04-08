@@ -9,7 +9,6 @@
   UX:
   - Add copy button to game data script
   - Save last calculated data in localstorage
-  - Make number input wide enough for 3 numbers
   - Move sections to panels/stepper
 
   Clarity:
