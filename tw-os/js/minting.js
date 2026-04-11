@@ -6,6 +6,7 @@
   - Take resource ratio into consideration (much leem)
   - Adjust/consider coinpull interval (markets don't have 100% uptime in practice)
   - Calculate optimal spots for unused flags (towns with snobs that are consistently overflowing)
+  - Different time periods such as 1h
 
   UX:
   - Save last calculated data in localstorage
