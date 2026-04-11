@@ -1,17 +1,22 @@
 
 /* TODO list
   Adjust coin calculation:
-  - Bonus village perks (50% storage+market)
   - Town bonus items (25% storage+market)
   - Take resource ratio into consideration (much leem)
   - Adjust/consider coinpull interval (markets don't have 100% uptime in practice)
-  - Calculate optimal spots for unused flags (towns with snobs that are consistently overflowing)
-  - Different time periods such as 1h
 
   UX:
   - Save last calculated data in localstorage
   - Move sections to panels/stepper
 */
+
+/* Wishlist
+  - Calculate optimal spots for unused flags (towns with snobs that are consistently overflowing)
+  - Different time periods such as 1h?
+*/
+
+JSON.stringify(
+    $('#villages tr').map((_, el) => [$(el).find('td').map((_, td) => $(td).text().trim()).toArray().slice(2, -1)]).toArray())
 
 var fieldsToStore = [
     'buildings', 
@@ -48,14 +53,20 @@ function readBuildings(data) {
 
     valJson.forEach(townData => {
         var town = {};
-        var coords = coordRegex.exec(townData[0]);
-        town.name = townData[0].substring(0, coords.index - 1);
+        town.bonusMarket = townData[0] == 'Bonus';
+
+        var coords = coordRegex.exec(townData[town.bonusMarket ? 1 : 0]);
+        town.name = townData[town.bonusMarket ? 1 : 0].substring(0, coords.index - 1);
         town.coords = { x: +coords[1], y: +coords[2] };
         town.hasSnob = +townData[townData.length - 11] > 0;
         town.market = +townData[townData.length - 8];
-        town.marketTransporters = marketLevels[town.market];
         town.storage = +townData[townData.length - 3];
-        town.storageCapacity = storageLevels[town.storage];
+
+        var mult = 1;
+        if (town.bonusMarket) mult += .5;
+
+        town.marketTransporters = Math.round(marketLevels[town.market] * mult);
+        town.storageCapacity = Math.round(storageLevels[town.storage] * mult);
 
         data.towns.push(town);
     });
@@ -270,7 +281,7 @@ function scoreTown(data, town, hub) {
     var dist = Math.sqrt((hub.coords.x - town.coords.x) ** 2 + (hub.coords.y - town.coords.y) ** 2);
     var resourcesToDump = (town.storageCapacity*3) * data.warehousesToDump;
     var tripsToDump = Math.ceil(resourcesToDump / 1000 / town.marketTransporters);
-    var timeToDumpFullResources = tripsToDump * dist * 2 * transportSpeed;
+    var timeToDumpFullResources = (tripsToDump * 2 - 1) * dist * transportSpeed;
     
     var resourcesAtHub = resourcesToDump;
     var resourcesAtSnob = 0;
@@ -463,7 +474,7 @@ var coordRegex = /\((\d{3})\|(\d{3})\)/;
 const marketLevels = [0,1,2,3,4,5,6,7,8,9,10,11,14,19,26,35,46,59,74,91,110,131,154,179,206,235];
 const storageLevels = [1000,1000,1229,1512,1859,2285,2810,3454,4247,5222,6420,7893,9705,11932,14670,18037,22177,27266,33523,41217,50675,62305,76604,94184,115798,142373,175047,215219,264611,325337,400000];
 const transportSpeed = 180;
-const coinCostTotal = 83000;
+const coinCostTotal = 83000; // 28/30/25
 const twoDays = 48*60*60;
 const mapColors = [
     "#FFD700", // Gold

@@ -52,7 +52,7 @@
                     <label for="buildings">
                         Enter your buildings overview
                     </label>
-                    <pre class="code" id="game-data-code">copy(JSON.stringify($('#villages tr').map((_, el) => [$(el).find('td').map((_, td) => $(td).text().trim()).toArray().slice(2, -1)]).toArray()))</pre>
+                    <pre class="code" id="game-data-code">copy(JSON.stringify($('#villages tr').map((idx, el) => [$(el).find('td').map((idx, td) => $(td).text().trim() || (idx == 0 && $(el).find('.bonus_icon_9').length && 'Bonus') || null).toArray()]).toArray()))</pre>
                     <button type="button" id="game-data-code-copy" class="btn btn-secondary" data-tl-copied="Copied!" data-tl-copy="Copy" onclick="copyGameDataScript()" style="display: inline-block; position: absolute; right: 15px; top: 78px;">Copy</button>
                     <textarea id="buildings" class="form-control" rows="8"></textarea>
                 </div>
@@ -75,15 +75,15 @@
                             <th style="color: white; background-color: #222">24%</th>
                         </tr>
                         <tr>
-                            <th style="background-color:grey"><input type="number" id="flag-10" value="0" style="width: 38px" /></th>
-                            <th style="background-color:saddlebrown"><input type="number" id="flag-12" value="0" style="width: 38px" /></th>
-                            <th style="background-color:darkred"><input type="number" id="flag-14" value="0" style="width: 38px" /></th>
-                            <th style="background-color:goldenrod"><input type="number" id="flag-16" value="0" style="width: 38px" /></th>
-                            <th style="background-color:darkgreen"><input type="number" id="flag-18" value="0" style="width: 38px" /></th>
-                            <th style="background-color:darkblue"><input type="number" id="flag-20" value="0" style="width: 38px" /></th>
-                            <th style="background-color:darkcyan"><input type="number" id="flag-22" value="0" style="width: 38px" /></th>
-                            <th style="background-color:purple"><input type="number" id="flag-23" value="0" style="width: 38px" /></th>
-                            <th style="background-color: #222"><input type="number" id="flag-24" value="0" style="width: 38px" /></th>
+                            <th style="background-color:grey"><input type="number" id="flag-10" value="0" min="0" max="999" style="width: 38px" /></th>
+                            <th style="background-color:saddlebrown"><input type="number" id="flag-12" value="0" min="0" max="999" style="width: 38px" /></th>
+                            <th style="background-color:darkred"><input type="number" id="flag-14" value="0" min="0" max="999" style="width: 38px" /></th>
+                            <th style="background-color:goldenrod"><input type="number" id="flag-16" value="0" min="0" max="999" style="width: 38px" /></th>
+                            <th style="background-color:darkgreen"><input type="number" id="flag-18" value="0" min="0" max="999" style="width: 38px" /></th>
+                            <th style="background-color:darkblue"><input type="number" id="flag-20" value="0" min="0" max="999" style="width: 38px" /></th>
+                            <th style="background-color:darkcyan"><input type="number" id="flag-22" value="0" min="0" max="999" style="width: 38px" /></th>
+                            <th style="background-color:purple"><input type="number" id="flag-23" value="0" min="0" max="999" style="width: 38px" /></th>
+                            <th style="background-color: #222"><input type="number" id="flag-24" value="0" min="0" max="999" style="width: 38px" /></th>
                         </tr>
                     </table>
                 </div>
@@ -92,13 +92,13 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="flag-boost">Flag boosts</label>
-                            <input type="number" id="flag-boost" value="0" style="width: 50px" />
+                            <input type="number" id="flag-boost" value="0" min="0" max="999" style="width: 50px" />
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="flag-boost">Noble decrees</label>
-                            <input type="number" id="noble-decree" value="0" style="width: 50px" />
+                            <input type="number" id="noble-decree" value="0" min="0" max="999" style="width: 50px" />
                         </div>
                     </div>
                 </div>
@@ -116,13 +116,13 @@
                             <th>30%</th>
                         </tr>
                         <tr>
-                            <th><input type="number" id="resourcepacks-1" value="0" style="width: 50px" /></th>
-                            <th><input type="number" id="resourcepacks-2" value="0" style="width: 50px" /></th>
-                            <th><input type="number" id="resourcepacks-5" value="0" style="width: 50px" /></th>
-                            <th><input type="number" id="resourcepacks-10" value="0" style="width: 50px" /></th>
-                            <th><input type="number" id="resourcepacks-15" value="0" style="width: 50px" /></th>
-                            <th><input type="number" id="resourcepacks-20" value="0" style="width: 50px" /></th>
-                            <th><input type="number" id="resourcepacks-30" value="0" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-1" value="0" min="0" max="999" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-2" value="0" min="0" max="999" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-5" value="0" min="0" max="999" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-10" value="0" min="0" max="999" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-15" value="0" min="0" max="999" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-20" value="0" min="0" max="999" style="width: 50px" /></th>
+                            <th><input type="number" id="resourcepacks-30" value="0" min="0" max="999" style="width: 50px" /></th>
                         </tr>
                     </table>
                     <div><small>(This is also assuming you have a full warehouse of existing resources stored and from passive income)</small></div>
