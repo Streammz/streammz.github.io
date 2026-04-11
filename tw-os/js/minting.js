@@ -2,8 +2,7 @@
 /* TODO list
   Adjust coin calculation:
   - Town bonus items (25% storage+market)
-  - Take resource ratio into consideration (much leem)
-  - Adjust/consider coinpull interval (markets don't have 100% uptime in practice)
+  - Add cluster info about how many coins are made in the hubs and how many in the town
 
   UX:
   - Save last calculated data in localstorage
@@ -35,6 +34,8 @@ function calc() {
     fieldsToStore.forEach(o => storeLocalStorage(o));
 
     var data = {};
+    data.coinPullInterval = 120;
+
     readBuildings(data);
     readFlags(data);
     readBoostItems(data);
@@ -279,9 +280,13 @@ function scoreTowns(data, towns) {
 
 function scoreTown(data, town, hub) {
     var dist = Math.sqrt((hub.coords.x - town.coords.x) ** 2 + (hub.coords.y - town.coords.y) ** 2);
-    var resourcesToDump = (town.storageCapacity*3) * data.warehousesToDump;
-    var tripsToDump = Math.ceil(resourcesToDump / 1000 / town.marketTransporters);
+    var resourcesToDump = town.storageCapacity * data.warehousesToDump / coinCostRatio;
+    var tripsToDump = Math.ceil(resourcesToDump / (town.marketTransporters * 1000));
     var timeToDumpFullResources = (tripsToDump * 2 - 1) * dist * transportSpeed;
+
+    if (data.coinPullInterval && tripsToDump > 1) {
+        timeToDumpFullResources += (data.coinPullInterval * (tripsToDump - 1) / 2 /*avg*/);
+    }
     
     var resourcesAtHub = resourcesToDump;
     var resourcesAtSnob = 0;
@@ -475,6 +480,7 @@ const marketLevels = [0,1,2,3,4,5,6,7,8,9,10,11,14,19,26,35,46,59,74,91,110,131,
 const storageLevels = [1000,1000,1229,1512,1859,2285,2810,3454,4247,5222,6420,7893,9705,11932,14670,18037,22177,27266,33523,41217,50675,62305,76604,94184,115798,142373,175047,215219,264611,325337,400000];
 const transportSpeed = 180;
 const coinCostTotal = 83000; // 28/30/25
+const coinCostRatio = 30000/coinCostTotal;
 const twoDays = 48*60*60;
 const mapColors = [
     "#FFD700", // Gold
