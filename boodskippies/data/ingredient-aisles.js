@@ -55,6 +55,10 @@ var aisleInfo = {
       "aisle": "Houdbare groente"
     },
     {
+      "name": "Andalause saus",
+      "aisle": "Zuren/sauzen/soepen"
+    },
+    {
       "name": "Andijvie",
       "aisle": "Groentewinkel"
     },
@@ -69,6 +73,10 @@ var aisleInfo = {
     {
       "name": "Augurk",
       "aisle": "Zuren/sauzen/soepen"
+    },
+    {
+      "name": "Avocado",
+      "aisle": "Groentewinkel"
     },
     {
       "name": "Avondvlees",
@@ -101,6 +109,10 @@ var aisleInfo = {
     {
       "name": "Boter",
       "aisle": "Zuivel/boter/toetjes"
+    },
+    {
+      "name": "Braadworst",
+      "aisle": "Vlees/koeling"
     },
     {
       "name": "Broccoli",
@@ -145,6 +157,10 @@ var aisleInfo = {
     {
       "name": "Chili mix Knorr",
       "aisle": "Wereldstraat"
+    },
+    {
+      "name": "Chiliflakes",
+      "aisle": "Kruiden"
     },
     {
       "name": "Chocopasta",
@@ -211,6 +227,10 @@ var aisleInfo = {
       "aisle": "Brood"
     },
     {
+      "name": "Euroma Avocado topping",
+      "aisle": "Kruiden"
+    },
+    {
       "name": "Feta",
       "aisle": "Vlees/koeling"
     },
@@ -221,6 +241,10 @@ var aisleInfo = {
     {
       "name": "Fruit",
       "aisle": "Groentewinkel"
+    },
+    {
+      "name": "Garlan",
+      "aisle": "Vlees/koeling"
     },
     {
       "name": "Gehakt",
@@ -381,6 +405,10 @@ var aisleInfo = {
     {
       "name": "Krieltjes",
       "aisle": "Groente/fruit"
+    },
+    {
+      "name": "Krieltjes (vers)",
+      "aisle": "Vlees/koeling"
     },
     {
       "name": "Kroepoek",
@@ -547,6 +575,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Pompoenstukjes",
+      "aisle": "Diepvries"
+    },
+    {
       "name": "Prei",
       "aisle": "Groentewinkel"
     },
@@ -601,6 +633,10 @@ var aisleInfo = {
     {
       "name": "Rucola",
       "aisle": "Groentewinkel"
+    },
+    {
+      "name": "Rucola klein",
+      "aisle": "Groente/fruit"
     },
     {
       "name": "Runderbouillonblokje",
@@ -711,6 +747,10 @@ var aisleInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Traybake kruiden",
+      "aisle": "Kruiden"
+    },
+    {
       "name": "Tuinbonen",
       "aisle": "Groentewinkel"
     },
@@ -765,6 +805,10 @@ var aisleInfo = {
     {
       "name": "Worstjes",
       "aisle": "Vlees/koeling"
+    },
+    {
+      "name": "Wortel tortillas",
+      "aisle": "Wereldstraat"
     },
     {
       "name": "Wraps maaltijdpakket",

@@ -23,9 +23,6 @@ var allRecipes = [
         "ingredient": "Snackla, koekla, mila snacks"
       },
       {
-        "ingredient": "Diksap"
-      },
-      {
         "ingredient": "Drinkyoghurt"
       },
       {
@@ -1923,6 +1920,93 @@ var allRecipes = [
       },
       {
         "ingredient": "Poke sauce"
+      }
+    ]
+  },
+  {
+    "name": "Lunch wraps",
+    "category": "Standaard",
+    "ingredients": [
+      {
+        "quantity": 1,
+        "ingredient": "Wortel tortillas"
+      },
+      {
+        "quantity": 1.5,
+        "ingredient": "Garlan"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Rucola klein"
+      },
+      {
+        "quantity": 2,
+        "ingredient": "Kipfilet"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Komkommer"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Paprika"
+      },
+      {
+        "quantity": 4,
+        "ingredient": "Ei"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Geraspte kaas"
+      },
+      {
+        "quantity": 1,
+        "ingredient": "Avocado"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Andalause saus"
+      },
+      {
+        "ingredient": "Euroma Avocado topping"
+      },
+      {
+        "ingredient": "Chiliflakes"
+      }
+    ]
+  },
+  {
+    "name": "Pompoen Traybake",
+    "category": "Traybakes",
+    "ingredients": [
+      {
+        "quantity": 500,
+        "quantityType": "gram",
+        "ingredient": "Krieltjes (vers)"
+      },
+      {
+        "quantity": 450,
+        "quantityType": "gram",
+        "ingredient": "Pompoenstukjes"
+      },
+      {
+        "quantity": 5,
+        "ingredient": "Braadworst"
+      },
+      {
+        "quantity": 200,
+        "quantityType": "gram",
+        "ingredient": "Cherrytomaten"
+      },
+      {
+        "quantity": 2,
+        "ingredient": "Ui"
+      }
+    ],
+    "optionalIngredients": [
+      {
+        "ingredient": "Traybake kruiden"
       }
     ]
   }
