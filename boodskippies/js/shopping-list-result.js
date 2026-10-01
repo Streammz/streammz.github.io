@@ -1,5 +1,6 @@
 
 // Import
+var getJumboProductUrl;
 
 // Export
 var renderShoppingListResult;
@@ -62,10 +63,11 @@ var generatedIngredients;
         $text.text(`${generateQuantityText(ingredient)} ${ingredient.ingredient}${ingredient.optional ? '?' : ''}`.trim());
         $label.attr('title', `Nodig voor de volgende recepten:\r\n- ${ingredient.recipes.join('\r\n- ')}`);
         var info = ingredientInfo.ingredients.find((item) => item.name == ingredient.ingredient);
-        if (info && info.jumboSku) {
+        var jumboUrl = getJumboProductUrl(info && info.jumboSku);
+        if (jumboUrl) {
             var linkLabel = `${ingredient.ingredient} bij Jumbo (opent in nieuw tabblad)`;
             $('<a class="shopping-jumbo-link" target="_blank" rel="noopener noreferrer"></a>')
-                .attr('href', 'https://www.jumbo.com/producten/product-' + encodeURIComponent(info.jumboSku))
+            .attr('href', jumboUrl)
                 .attr('aria-label', linkLabel)
                 .attr('title', linkLabel)
                 .append(lucide.createElement(lucide.icons.Truck, { 'aria-hidden': 'true', width: 22, height: 22 }))
