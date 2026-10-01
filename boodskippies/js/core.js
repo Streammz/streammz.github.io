@@ -10,6 +10,7 @@ var renderIngredientInfo;
 var arrDistinct;
 var switchPage;
 var quantityTypes;
+var getJumboProductUrl;
 
 (function () {
 
@@ -57,6 +58,21 @@ var quantityTypes;
             $(this).parent().addClass('active');
         })
     })
+
+    getJumboProductUrl = function (value) {
+        try {
+            var url = new URL(value);
+            if (!['http:', 'https:'].includes(url.protocol) ||
+                !['jumbo.com', 'www.jumbo.com'].includes(url.hostname) ||
+                url.username || url.password ||
+                !/^\/producten\/[^/]+\/?$/.test(url.pathname)) {
+                return '';
+            }
+            return url.href;
+        } catch {
+            return '';
+        }
+    }
 
     arrDistinct = (val, idx, arr) => arr.indexOf(val) === idx;
     quantityTypes = [

@@ -2,6 +2,7 @@
 // Import
 var allRecipes;
 var ingredientInfo;
+var getJumboProductUrl;
 
 // Export
 var renderIngredientInfo;
@@ -27,32 +28,13 @@ var renderIngredientInfo;
                 .split(/\r?\n/)
                 .map((line) => line.trim())
                 .find((line) => line && !line.startsWith('#'));
-            var sku = extractJumboSku(link);
-            if (sku) {
-                $(this).val(sku).trigger('input');
+            var url = getJumboProductUrl(link);
+            if (url) {
+                $(this).val(url).trigger('input');
                 this.focus();
             }
         });
     });
-
-    function extractJumboSku(link) {
-        try {
-            var url = new URL(link);
-            if (!['http:', 'https:'].includes(url.protocol) ||
-                !['jumbo.com', 'www.jumbo.com'].includes(url.hostname)) {
-                return '';
-            }
-            var segments = url.pathname.split('/');
-            if (segments[1] !== 'producten' || !segments[2]) {
-                return '';
-            }
-            var slug = segments[2];
-            var separator = slug.lastIndexOf('-');
-            return separator < 0 ? '' : slug.slice(separator + 1);
-        } catch {
-            return '';
-        }
-    }
 
     renderIngredientInfo = function () {
         allIngredients = allRecipes.map((val) => val.ingredients.map((o) => o.ingredient))

@@ -38,7 +38,7 @@ The app uses plain HTML, Bootstrap, jQuery, and static JavaScript files. There i
 - `js/recipe-details.js` — add/edit recipe form logic
 - `js/shopping-list.js` — recipe selection and ingredient aggregation
 - `js/shopping-list-result.js` — grouped grocery output by aisle
-- `js/ingredient-info.js` — ingredient aisle and Jumbo SKU management
+- `js/ingredient-info.js` — ingredient aisle and Jumbo product URL management
 - `data/recipes.js` — recipe definitions
 - `data/ingredient-info.js` — aisle definitions and ingredient metadata
 
@@ -69,12 +69,12 @@ var ingredientInfo = {
   aisles: ['Groente/fruit', 'Brood'],
   ingredients: [
     { name: 'Aardappels', aisle: 'Groente/fruit' },
-    { name: 'Brood', aisle: 'Brood', jumboSku: '001234' }
+    { name: 'Brood', aisle: 'Brood', jumboSku: 'https://www.jumbo.com/producten/jumbo-boeren-tijgerbrood-volkoren-half-631837STK' }
   ]
 };
 ```
 
-`jumboSku` is an optional string. Saving trims surrounding whitespace and omits the property when the field is empty.
+`jumboSku` is an optional string containing the full Jumbo product URL, including its slug. The field name is retained for compatibility. Legacy short SKUs remain saved but do not render as links. Saving trims surrounding whitespace and omits the property when the field is empty; dropping a Jumbo product link preserves its full URL.
 
 ## Notes for AI agents
 
@@ -90,6 +90,6 @@ Open `index.html` in a browser and use the navigation items:
 
 - `Lijst maken` to build a shopping list
 - `Recepten` to maintain recipes
-- `Ingrediënten info` to assign ingredient aisles and optional Jumbo SKUs
+- `Ingrediënten info` to assign ingredient aisles and optional Jumbo product URLs
 
 The app is designed for local use in the browser and is intentionally lightweight.

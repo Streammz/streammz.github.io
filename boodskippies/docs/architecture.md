@@ -10,7 +10,7 @@ The main page sections are:
 - `#shopping-list-result` — show grouped ingredients by aisle
 - `#recipe-list` — manage recipe cards by category
 - `#recipe-details` — edit or create a recipe
-- `#ingredient-info` — manage supermarket aisles and optional Jumbo SKUs for ingredients
+- `#ingredient-info` — manage supermarket aisles and optional Jumbo product URLs for ingredients
 
 Page switching happens through `switchPage(page, payload)` in `js/core.js`.
 
@@ -49,7 +49,7 @@ Page switching happens through `switchPage(page, payload)` in `js/core.js`.
 - sorts by the order defined in `ingredientInfo.aisles`
 - renders aisle subheadings and touch-friendly item checkboxes; checked items are struck through
 - keeps optional items muted and recipe metadata in item tooltips
-- links items with a `jumboSku` to their Jumbo product page in a new tab using a yellow Lucide truck icon
+- links items only when `jumboSku` contains a full HTTP(S) Jumbo product URL, using a yellow Lucide truck icon to open that exact URL in a new tab; short SKUs and invalid URLs have no link
 - checkbox state lasts for the rendered list and resets when a new result is generated
 
 ### Ingredient info management
@@ -57,7 +57,8 @@ Page switching happens through `switchPage(page, payload)` in `js/core.js`.
 `ingredient-info.js`:
 
 - extracts all ingredient names from recipes
-- displays them in a table with an aisle dropdown and an optional Jumbo SKU text field
+- displays them in a table with an aisle dropdown and an optional Jumbo URL text field
+- preserves full dropped product URLs, validated by the shared `getJumboProductUrl` helper in `core.js`
 - saves the updated `ingredientInfo` object to the clipboard, omitting blank `jumboSku` properties
 
 ## Data sources
