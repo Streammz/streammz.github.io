@@ -76,7 +76,8 @@ var ingredientInfo = {
     },
     {
       "name": "Avocado",
-      "aisle": "Groentewinkel"
+      "aisle": "Groentewinkel",
+      "jumboSku": "422940STK"
     },
     {
       "name": "Avondvlees",
@@ -189,10 +190,6 @@ var ingredientInfo = {
     {
       "name": "Dezem baguette",
       "aisle": "(Af)bakproducten"
-    },
-    {
-      "name": "Diksap",
-      "aisle": "Koek/baby"
     },
     {
       "name": "Doperwten",
