@@ -1,4 +1,4 @@
-var aisleInfo = {
+var ingredientInfo = {
   "aisles": [
     "Groente/fruit",
     "Kruiden",

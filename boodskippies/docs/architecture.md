@@ -10,7 +10,7 @@ The main page sections are:
 - `#shopping-list-result` — show grouped ingredients by aisle
 - `#recipe-list` — manage recipe cards by category
 - `#recipe-details` — edit or create a recipe
-- `#aisles` — map ingredient names to supermarket aisles
+- `#ingredient-info` — manage supermarket aisles and optional Jumbo SKUs for ingredients
 
 Page switching happens through `switchPage(page, payload)` in `js/core.js`.
 
@@ -46,16 +46,16 @@ Page switching happens through `switchPage(page, payload)` in `js/core.js`.
 `shopping-list-result.js`:
 
 - groups generated items by aisle
-- sorts by the order defined in `aisleInfo.aisles`
+- sorts by the order defined in `ingredientInfo.aisles`
 - renders a nested list structure with item names, quantities, and recipe metadata
 
-### Aisle management
+### Ingredient info management
 
-`aisles.js`:
+`ingredient-info.js`:
 
 - extracts all ingredient names from recipes
-- displays them in a table with a dropdown for aisle selection
-- saves the updated `aisleInfo` object to the clipboard
+- displays them in a table with an aisle dropdown and an optional Jumbo SKU text field
+- saves the updated `ingredientInfo` object to the clipboard, omitting blank `jumboSku` properties
 
 ## Data sources
 
@@ -63,7 +63,7 @@ The app intentionally does not use a backend. Static data is loaded via script t
 
 ```html
 <script src="data/recipes.js"></script>
-<script src="data/ingredient-aisles.js"></script>
+<script src="data/ingredient-info.js"></script>
 <script src="js/core.js"></script>
 ```
 
@@ -71,7 +71,7 @@ This means changing the data files updates the app immediately in the browser.
 
 ## Naming and conventions
 
-- Global app state is stored in top-level variables like `allRecipes` and `aisleInfo`.
+- Global app state is stored in top-level variables like `allRecipes` and `ingredientInfo`.
 - The code uses a mix of ES5-style functions and jQuery patterns.
 - `renderX` functions are assigned to global variables and called by `switchPage`.
 - `$(function () { ... })` is used to bind events after the DOM is ready.
@@ -86,6 +86,6 @@ This means changing the data files updates the app immediately in the browser.
 ## Good editing rules
 
 - Keep ingredient names consistent across recipes to ensure merged shopping list behavior works correctly.
-- Match aisle names to the values in `data/ingredient-aisles.js` exactly.
+- Match aisle names to the values in `data/ingredient-info.js` exactly.
 - Be careful when rearranging script load order because the app expects globals and DOM elements to exist before the logic runs.
 - If adding a new page, also register it in `switchPage(...)` and ensure a matching element exists in `index.html`.

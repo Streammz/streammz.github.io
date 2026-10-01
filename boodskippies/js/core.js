@@ -4,7 +4,7 @@ var renderRecipesList;
 var renderRecipeDetails;
 var renderShoppingList;
 var renderShoppingListResult;
-var renderAisles;
+var renderIngredientInfo;
 
 // Export
 var arrDistinct;
@@ -38,9 +38,9 @@ var quantityTypes;
             renderShoppingListResult(arguments[1]);
             switchPageInternal($("#shopping-list-result"));
         }
-        if (page == 'aisles') {
-            renderAisles();
-            switchPageInternal($("#aisles"));
+        if (page == 'ingredientInfo') {
+            renderIngredientInfo();
+            switchPageInternal($("#ingredient-info"));
         }
     }
 

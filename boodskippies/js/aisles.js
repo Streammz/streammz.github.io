@@ -42,6 +42,7 @@ var renderAisles;
         var value = aisleInfo.ingredients.filter((o) => o.name == ingredient)[0];
         if (value) {
             result.find('.value').val(value.aisle);
+            result.find('.jumbo-sku').val(value.jumboSku || '');
         }
         return result;
     }
@@ -50,10 +51,15 @@ var renderAisles;
         var result = {};
         result.aisles = aisleInfo.aisles;
         result.ingredients = $ingredientsList.find('tr').map(function (_, elem) {
-            return {
+            var ingredient = {
                 name: $(elem).find('.name').text(),
                 aisle: $(elem).find('.value').val() || null,
             };
+            var jumboSku = $(elem).find('.jumbo-sku').val().trim();
+            if (jumboSku) {
+                ingredient.jumboSku = jumboSku;
+            }
+            return ingredient;
         }).toArray();
         return result;
     }

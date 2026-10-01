@@ -19,12 +19,12 @@ var generatedIngredients;
     function buildGroupedIngredients(ingredients) {
         var groups = ingredients
             .map(function (val) { 
-                var aisle = aisleInfo.ingredients.filter((o) => o.name == val.ingredient)[0].aisle;
+                var aisle = ingredientInfo.ingredients.filter((o) => o.name == val.ingredient)[0].aisle;
                 return { ingredient: val, aisle: aisle };
             })
             .sort(function (a, b) {
-                var aIndex = aisleInfo.aisles.indexOf(a.aisle);
-                var bIndex = aisleInfo.aisles.indexOf(b.aisle);
+                var aIndex = ingredientInfo.aisles.indexOf(a.aisle);
+                var bIndex = ingredientInfo.aisles.indexOf(b.aisle);
                 return aIndex > bIndex ? 1 : -1;
             }).reduce(function (result, cur) {
                 result[cur.aisle] = result[cur.aisle] || [];
@@ -33,8 +33,8 @@ var generatedIngredients;
             }, {});
         
         var sortedGroups = Object.keys(groups).sort(function (a, b) {
-            var aIndex = aisleInfo.aisles.indexOf(a);
-            var bIndex = aisleInfo.aisles.indexOf(b);
+            var aIndex = ingredientInfo.aisles.indexOf(a);
+            var bIndex = ingredientInfo.aisles.indexOf(b);
             return aIndex > bIndex ? 1 : -1;
         });
 

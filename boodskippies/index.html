@@ -21,7 +21,7 @@
           <a class="nav-link" href="#" data-page="recipes">Recepten</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" data-page="aisles">Gangpaden</a>
+          <a class="nav-link" href="#" data-page="ingredientInfo">Ingrediënten info</a>
         </li>
       </ul>
     </div>
@@ -163,15 +163,16 @@
       <ul id="ingredients-list"></ul>
     </div>
 
-    <div id="aisles" class="app-page" style="display: none">
+    <div id="ingredient-info" class="app-page" style="display: none">
       <button type="button" id="save-button" class="btn btn-success float-right mt-2 mr-1">Opslaan</button>
-      <h1>Gangpaden beheren</h1>
+      <h1>Ingrediënten info</h1>
 
       <table class="table" id="ingredient-list">
         <thead>
           <tr>
             <th>Ingrediënt</th>
             <th>Gangpad</th>
+            <th>Jumbo SKU</th>
           </tr>
         </thead>
         <tbody>
@@ -179,6 +180,7 @@
             <tr>
               <td class="name"></td>
               <td><select class="form-control value"><option value="" style="display:none"></option></select></td>
+              <td><input type="text" class="form-control jumbo-sku" aria-label="Jumbo SKU" /></td>
             </tr>
           </script>
         </tbody>
@@ -190,12 +192,12 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="data/recipes.js"></script>
-  <script src="data/ingredient-aisles.js"></script>
+  <script src="data/ingredient-info.js"></script>
   <script src="js/core.js"></script>
   <script src="js/recipe-list.js"></script>
   <script src="js/recipe-details.js"></script>
   <script src="js/shopping-list.js"></script>
   <script src="js/shopping-list-result.js"></script>
-  <script src="js/aisles.js"></script>
+  <script src="js/ingredient-info.js"></script>
   </body>
 </html>

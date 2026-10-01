@@ -17,7 +17,7 @@ The app uses plain HTML, Bootstrap, jQuery, and static JavaScript files. There i
 
 1. `index.html` defines the pages and navigation.
 2. `data/recipes.js` contains the master recipe list as a global `allRecipes` array.
-3. `data/ingredient-aisles.js` contains the aisle definitions as a global `aisleInfo` object.
+3. `data/ingredient-info.js` contains aisle definitions and ingredient metadata as a global `ingredientInfo` object.
 4. The JS files under `js/` render each page, capture form edits, and navigate between screens.
 5. The shopping list page merges matched ingredients from selected recipes into one grouped result.
 6. Save actions copy generated JavaScript snippets to the clipboard, not to local storage or a server.
@@ -27,7 +27,7 @@ The app uses plain HTML, Bootstrap, jQuery, and static JavaScript files. There i
 - The app relies on global variables and jQuery DOM selectors.
 - Navigation is handled through `switchPage(...)` in `js/core.js`.
 - All pages are in one HTML file, but they are shown/hidden by CSS (`display: none`).
-- The generated shopping list is ordered by aisle using `aisleInfo.aisles`.
+- The generated shopping list is ordered by aisle using `ingredientInfo.aisles`.
 - Optional ingredients are included in a muted, italicized result but are marked as non-required.
 
 ## Main files
@@ -38,9 +38,9 @@ The app uses plain HTML, Bootstrap, jQuery, and static JavaScript files. There i
 - `js/recipe-details.js` — add/edit recipe form logic
 - `js/shopping-list.js` — recipe selection and ingredient aggregation
 - `js/shopping-list-result.js` — grouped grocery output by aisle
-- `js/aisles.js` — ingredient-to-aisle assignment management
+- `js/ingredient-info.js` — ingredient aisle and Jumbo SKU management
 - `data/recipes.js` — recipe definitions
-- `data/ingredient-aisles.js` — aisle metadata and ingredient mapping
+- `data/ingredient-info.js` — aisle definitions and ingredient metadata
 
 ## Data model
 
@@ -62,17 +62,19 @@ Each recipe is an object like:
 }
 ```
 
-### Aisle config
+### Ingredient info
 
 ```js
-var aisleInfo = {
+var ingredientInfo = {
   aisles: ['Groente/fruit', 'Brood'],
   ingredients: [
     { name: 'Aardappels', aisle: 'Groente/fruit' },
-    { name: 'Brood', aisle: 'Brood' }
+    { name: 'Brood', aisle: 'Brood', jumboSku: '001234' }
   ]
 };
 ```
+
+`jumboSku` is an optional string. Saving trims surrounding whitespace and omits the property when the field is empty.
 
 ## Notes for AI agents
 
@@ -88,6 +90,6 @@ Open `index.html` in a browser and use the navigation items:
 
 - `Lijst maken` to build a shopping list
 - `Recepten` to maintain recipes
-- `Gangpaden` to assign ingredient aisles
+- `Ingrediënten info` to assign ingredient aisles and optional Jumbo SKUs
 
 The app is designed for local use in the browser and is intentionally lightweight.
