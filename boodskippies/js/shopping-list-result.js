@@ -19,7 +19,8 @@ var generatedIngredients;
     function buildGroupedIngredients(ingredients) {
         var groups = ingredients
             .map(function (val) { 
-                var aisle = ingredientInfo.ingredients.filter((o) => o.name == val.ingredient)[0].aisle;
+                var info = ingredientInfo.ingredients.find((item) => item.name == val.ingredient);
+                var aisle = (info && info.aisle) || 'Overig';
                 return { ingredient: val, aisle: aisle };
             })
             .sort(function (a, b) {
@@ -38,10 +39,11 @@ var generatedIngredients;
             return aIndex > bIndex ? 1 : -1;
         });
 
-        var result = $('<ul></ul>');
+        var result = $('<div></div>');
         for (var key of sortedGroups) {
-            var $li = $("<li></li>").text(key).appendTo(result);
-            var $ul = $("<ul></ul>").appendTo($li);
+            var $section = $('<section class="shopping-aisle"></section>').appendTo(result);
+            $('<h2 class="shopping-aisle-heading"></h2>').text(key).appendTo($section);
+            var $ul = $('<ul class="shopping-items"></ul>').appendTo($section);
             for (var ingredient of groups[key]) {
                 buildIngredientRow(ingredient).appendTo($ul);
             }
@@ -50,12 +52,25 @@ var generatedIngredients;
     }
 
     function buildIngredientRow(ingredient) {
-        var result = $('<li></li>');
+        var result = $('<li class="shopping-item"></li>');
+        var $label = $('<label class="shopping-item-label"></label>').appendTo(result);
+        $('<input type="checkbox" class="shopping-item-check" />').appendTo($label);
+        var $text = $('<span class="shopping-item-text"></span>').appendTo($label);
         if (ingredient.optional) {
-            result.addClass('text-muted font-italic font-weight-light');
+            $text.addClass('text-muted font-italic');
         }
-        result.text(`${generateQuantityText(ingredient)} ${ingredient.ingredient}${ingredient.optional ? '?' : ''}`.trim());
-        result.attr('title', `Nodig voor de volgende recepten:\r\n- ${ingredient.recipes.join('\r\n- ')}`);
+        $text.text(`${generateQuantityText(ingredient)} ${ingredient.ingredient}${ingredient.optional ? '?' : ''}`.trim());
+        $label.attr('title', `Nodig voor de volgende recepten:\r\n- ${ingredient.recipes.join('\r\n- ')}`);
+        var info = ingredientInfo.ingredients.find((item) => item.name == ingredient.ingredient);
+        if (info && info.jumboSku) {
+            var linkLabel = `${ingredient.ingredient} bij Jumbo (opent in nieuw tabblad)`;
+            $('<a class="shopping-jumbo-link" target="_blank" rel="noopener noreferrer"></a>')
+                .attr('href', 'https://www.jumbo.com/producten/product-' + encodeURIComponent(info.jumboSku))
+                .attr('aria-label', linkLabel)
+                .attr('title', linkLabel)
+                .append(lucide.createElement(lucide.icons.Truck, { 'aria-hidden': 'true', width: 22, height: 22 }))
+                .appendTo(result);
+        }
         return result;
     }
 

@@ -47,7 +47,10 @@ Page switching happens through `switchPage(page, payload)` in `js/core.js`.
 
 - groups generated items by aisle
 - sorts by the order defined in `ingredientInfo.aisles`
-- renders a nested list structure with item names, quantities, and recipe metadata
+- renders aisle subheadings and touch-friendly item checkboxes; checked items are struck through
+- keeps optional items muted and recipe metadata in item tooltips
+- links items with a `jumboSku` to their Jumbo product page in a new tab using a yellow Lucide truck icon
+- checkbox state lasts for the rendered list and resets when a new result is generated
 
 ### Ingredient info management
 

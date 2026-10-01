@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Boodskippies</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    #shopping-list-result { max-width: 720px; margin: 0 auto; padding-bottom: 2rem; }
+    #shopping-list-result h1 { font-size: 1.75rem; overflow-wrap: anywhere; }
+    .shopping-aisle { margin-top: 1.5rem; }
+    .shopping-aisle-heading { font-size: 1.125rem; font-weight: 600; margin: 0; padding-bottom: .5rem; border-bottom: 2px solid #d9dfe2; }
+    .shopping-items { list-style: none; padding: 0; margin: 0; }
+    .shopping-item { display: flex; align-items: center; gap: .5rem; border-bottom: 1px solid #e9ecef; }
+    .shopping-item-label { display: flex; align-items: center; gap: .75rem; flex: 1; min-width: 0; min-height: 48px; margin: 0; padding: .75rem .25rem; cursor: pointer; touch-action: manipulation; }
+    .shopping-item-check { flex: 0 0 22px; width: 22px; height: 22px; margin: 0; accent-color: #287548; cursor: pointer; }
+    .shopping-item-text { min-width: 0; overflow-wrap: anywhere; }
+    .shopping-item-check:checked + .shopping-item-text { text-decoration: line-through; color: #6c757d; }
+    .shopping-jumbo-link { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 44px; width: 44px; height: 44px; color: #765700; border-radius: 4px; touch-action: manipulation; }
+    .shopping-jumbo-link svg { fill: #ffcf00; }
+    .shopping-jumbo-link:hover { color: #513c00; background: #fff4c2; }
+    .shopping-jumbo-link:focus-visible, .shopping-item-check:focus-visible { outline: 2px solid #287548; outline-offset: 2px; }
+  </style>
   </head>
   <body>
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -160,7 +176,7 @@
 
     <div id="shopping-list-result" class="app-page" style="display: none">
       <h1>Boodschappenlijst</h1>
-      <ul id="ingredients-list"></ul>
+      <div id="ingredients-list"></div>
     </div>
 
     <div id="ingredient-info" class="app-page" style="display: none">
@@ -191,6 +207,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <script src="data/recipes.js"></script>
   <script src="data/ingredient-info.js"></script>
   <script src="js/core.js"></script>
