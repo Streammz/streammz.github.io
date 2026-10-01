@@ -2015,5 +2015,31 @@ var allRecipes = [
         "ingredient": "Traybake kruiden"
       }
     ]
+  },
+  {
+    "name": "Rosti schotel",
+    "category": "Makkelijk",
+    "ingredients": [
+      {
+        "quantity": 1,
+        "ingredient": "Rösti"
+      },
+      {
+        "quantity": 400,
+        "quantityType": "gram",
+        "ingredient": "Sperziebonen (vers)"
+      },
+      {
+        "quantity": 500,
+        "quantityType": "gram",
+        "ingredient": "Kipshoarma"
+      },
+      {
+        "quantity": 100,
+        "quantityType": "gram",
+        "ingredient": "Geraspte kaas"
+      }
+    ],
+    "optionalIngredients": []
   }
 ]

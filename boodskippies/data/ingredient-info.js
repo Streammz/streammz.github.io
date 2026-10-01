@@ -411,6 +411,10 @@ var ingredientInfo = {
       "jumboSku": "https://www.jumbo.com/producten/jumbo-scharrel-kipfilet-tuinkruiden-115-g-655339STK"
     },
     {
+      "name": "Kipshoarma",
+      "aisle": "Vlees/koeling"
+    },
+    {
       "name": "Knoflook",
       "aisle": "Groentewinkel"
     },
@@ -718,6 +722,10 @@ var ingredientInfo = {
       "aisle": "Wereldstraat"
     },
     {
+      "name": "Rösti",
+      "aisle": "Diepvries"
+    },
+    {
       "name": "Saitaku pokérijst",
       "aisle": "Wereldstraat",
       "jumboSku": "https://www.jumbo.com/producten/saitaku-poke-rice-500-g-586063DS"
@@ -771,6 +779,10 @@ var ingredientInfo = {
     {
       "name": "Sperziebonen",
       "aisle": "Groentewinkel"
+    },
+    {
+      "name": "Sperziebonen (vers)",
+      "aisle": "Groente/fruit"
     },
     {
       "name": "Sperziebonen pot",
