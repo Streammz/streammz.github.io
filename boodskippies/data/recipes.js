@@ -26,7 +26,10 @@ var allRecipes = [
         "ingredient": "Drinkyoghurt"
       },
       {
-        "ingredient": "WC-papier/keukenpapier"
+        "ingredient": "WC-papier"
+      },
+      {
+        "ingredient": "Keukenpapier"
       },
       {
         "ingredient": "Vuilniszakken"
@@ -44,7 +47,10 @@ var allRecipes = [
         "ingredient": "Broodbeleg"
       },
       {
-        "ingredient": "Kattengrind/korrel"
+        "ingredient": "Kattengrind"
+      },
+      {
+        "ingredient": "Kattenkorrel"
       },
       {
         "ingredient": "Ei"
