@@ -17,7 +17,42 @@ var renderIngredientInfo;
 
     $(function () {
         $saveButton.on('click', onSave);
+        $root.on('dragover', '.jumbo-sku', function (event) {
+            event.preventDefault();
+        });
+        $root.on('drop', '.jumbo-sku', function (event) {
+            event.preventDefault();
+            var transfer = event.originalEvent.dataTransfer;
+            var link = (transfer.getData('text/uri-list') || transfer.getData('text/plain'))
+                .split(/\r?\n/)
+                .map((line) => line.trim())
+                .find((line) => line && !line.startsWith('#'));
+            var sku = extractJumboSku(link);
+            if (sku) {
+                $(this).val(sku).trigger('input');
+                this.focus();
+            }
+        });
     });
+
+    function extractJumboSku(link) {
+        try {
+            var url = new URL(link);
+            if (!['http:', 'https:'].includes(url.protocol) ||
+                !['jumbo.com', 'www.jumbo.com'].includes(url.hostname)) {
+                return '';
+            }
+            var segments = url.pathname.split('/');
+            if (segments[1] !== 'producten' || !segments[2]) {
+                return '';
+            }
+            var slug = segments[2];
+            var separator = slug.lastIndexOf('-');
+            return separator < 0 ? '' : slug.slice(separator + 1);
+        } catch {
+            return '';
+        }
+    }
 
     renderIngredientInfo = function () {
         allIngredients = allRecipes.map((val) => val.ingredients.map((o) => o.ingredient))
