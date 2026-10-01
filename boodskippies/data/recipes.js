@@ -444,7 +444,7 @@ var allRecipes = [
       },
       {
         "quantity": 2,
-        "ingredient": "Eieren"
+        "ingredient": "Ei"
       },
       {
         "quantity": 1,
@@ -527,7 +527,7 @@ var allRecipes = [
       },
       {
         "quantity": 3,
-        "ingredient": "Eieren"
+        "ingredient": "Ei"
       }
     ],
     "optionalIngredients": [
@@ -548,7 +548,7 @@ var allRecipes = [
     "ingredients": [
       {
         "quantity": 1,
-        "ingredient": "Doperwtjes pot"
+        "ingredient": "Doperwten"
       },
       {
         "quantity": 1,
@@ -577,7 +577,7 @@ var allRecipes = [
     "ingredients": [
       {
         "quantity": 1,
-        "ingredient": "Doperwtjes pot"
+        "ingredient": "Doperwten"
       },
       {
         "quantity": 1,
@@ -796,7 +796,7 @@ var allRecipes = [
       },
       {
         "quantity": 3,
-        "ingredient": "Eieren"
+        "ingredient": "Ei"
       },
       {
         "quantity": 1,
@@ -827,7 +827,7 @@ var allRecipes = [
       },
       {
         "quantity": 1,
-        "ingredient": "Doperwtjes"
+        "ingredient": "Doperwten"
       }
     ],
     "optionalIngredients": [
@@ -989,7 +989,7 @@ var allRecipes = [
       },
       {
         "quantity": 3,
-        "ingredient": "Eieren"
+        "ingredient": "Ei"
       },
       {
         "quantity": 1,
@@ -1243,7 +1243,7 @@ var allRecipes = [
       },
       {
         "quantity": 0.5,
-        "ingredient": "Achterham"
+        "ingredient": "Ham"
       },
       {
         "quantity": 1,
@@ -1375,7 +1375,7 @@ var allRecipes = [
       },
       {
         "quantity": 1,
-        "ingredient": "Eieren"
+        "ingredient": "Ei"
       },
       {
         "quantity": 1,
@@ -1469,7 +1469,7 @@ var allRecipes = [
       },
       {
         "quantity": 1,
-        "ingredient": "Cherrytomaatjes"
+        "ingredient": "Cherrytomaten"
       },
       {
         "quantity": 0.5,
@@ -1550,7 +1550,7 @@ var allRecipes = [
         "ingredient": "Olijfolie"
       },
       {
-        "ingredient": "Zwarte peper"
+        "ingredient": "Peper"
       },
       {
         "ingredient": "Bakpapier"
@@ -1677,7 +1677,7 @@ var allRecipes = [
       },
       {
         "quantity": 1,
-        "ingredient": "Spekjes"
+        "ingredient": "Spekreepjes"
       },
       {
         "quantity": 450,
@@ -1714,7 +1714,7 @@ var allRecipes = [
       {
         "quantity": 200,
         "quantityType": "gram",
-        "ingredient": "Dopewrten diepvries"
+        "ingredient": "Doperwten diepvries"
       },
       {
         "quantity": 100,
@@ -1787,7 +1787,7 @@ var allRecipes = [
       },
       {
         "quantity": 1,
-        "ingredient": "Rode paprika"
+        "ingredient": "Paprika"
       },
       {
         "quantity": 200,
@@ -1895,7 +1895,7 @@ var allRecipes = [
       {
         "quantity": 150,
         "quantityType": "gram",
-        "ingredient": "Peen Julienne"
+        "ingredient": "Peen julienne"
       },
       {
         "quantity": 1,

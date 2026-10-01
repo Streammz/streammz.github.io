@@ -39,10 +39,6 @@ var ingredientInfo = {
       "aisle": "Groente/fruit"
     },
     {
-      "name": "Achterham",
-      "aisle": "Vlees/koeling"
-    },
-    {
       "name": "Afbakbrood",
       "aisle": "(Af)bakproducten"
     },
@@ -148,10 +144,6 @@ var ingredientInfo = {
       "aisle": "Groentewinkel"
     },
     {
-      "name": "Cherrytomaatjes",
-      "aisle": "Groentewinkel"
-    },
-    {
       "name": "Cherrytomaten",
       "aisle": "Groentewinkel"
     },
@@ -196,15 +188,7 @@ var ingredientInfo = {
       "aisle": "Houdbare groente"
     },
     {
-      "name": "Doperwtjes",
-      "aisle": "Houdbare groente"
-    },
-    {
-      "name": "Doperwtjes pot",
-      "aisle": "Houdbare groente"
-    },
-    {
-      "name": "Dopewrten diepvries",
+      "name": "Doperwten diepvries",
       "aisle": "Diepvries"
     },
     {
@@ -217,10 +201,6 @@ var ingredientInfo = {
     },
     {
       "name": "Ei",
-      "aisle": "Brood"
-    },
-    {
-      "name": "Eieren",
       "aisle": "Brood"
     },
     {
@@ -516,10 +496,6 @@ var ingredientInfo = {
       "aisle": "Diepvries"
     },
     {
-      "name": "Peen Julienne",
-      "aisle": "Groente/fruit"
-    },
-    {
       "name": "Peen julienne",
       "aisle": "Groentewinkel"
     },
@@ -600,10 +576,6 @@ var ingredientInfo = {
       "aisle": "Wereldstraat"
     },
     {
-      "name": "Rode paprika",
-      "aisle": "Groentewinkel"
-    },
-    {
       "name": "Rode peper",
       "aisle": "Groentewinkel"
     },
@@ -678,10 +650,6 @@ var ingredientInfo = {
     {
       "name": "Sojasaus",
       "aisle": "Wereldstraat"
-    },
-    {
-      "name": "Spekjes",
-      "aisle": "Vlees/koeling"
     },
     {
       "name": "Spekreepjes",
@@ -829,10 +797,6 @@ var ingredientInfo = {
     },
     {
       "name": "Zout",
-      "aisle": "Kruiden"
-    },
-    {
-      "name": "Zwarte peper",
       "aisle": "Kruiden"
     }
   ]
