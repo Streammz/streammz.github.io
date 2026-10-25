@@ -1809,6 +1809,10 @@ var allRecipes = [
         "ingredient": "Tacokruidenmix (Santa Maria)"
       },
       {
+        "quantity": 1,
+        "ingredient": "Nacho chips"
+      },
+      {
         "quantity": 150,
         "quantityType": "gram",
         "ingredient": "Geraspte kaas"

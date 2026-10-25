@@ -539,6 +539,10 @@ var ingredientInfo = {
       "aisle": "Groentewinkel"
     },
     {
+      "name": "Nacho chips",
+      "aisle": "Wereldstraat"
+    },
+    {
       "name": "Nacho ovenschotel pakket",
       "aisle": "Wereldstraat",
       "jumboSku": "https://www.jumbo.com/producten/knorr-wereldgerechten-foodtrips-nacho-ovenschotel-190-g-513190DS"
