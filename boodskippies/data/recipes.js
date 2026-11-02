@@ -246,6 +246,10 @@ var allRecipes = [
         "ingredient": "Roti maaltijdpakket"
       },
       {
+        "quantity": 3,
+        "ingredient": "Ei"
+      },
+      {
         "quantity": 1,
         "ingredient": "Krieltjes"
       },
